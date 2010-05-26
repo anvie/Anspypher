@@ -1,0 +1,17 @@
+.gitignore
+*.*~
+*#
+*build/
+bin/
+*.a
+*.o
+*.obj
+*.pyc
+*.exe
+*.dylib
+CMakeCache.txt
+CMakeScripts/
+*.xcodeproj/
+.DS_Store
+CMakeFiles/
+cmake_install.cmake

@@ -1,0 +1,32 @@
+
+package anspypher;
+
+message SearchResult {
+  required string title = 1;
+  optional string tags = 2;
+  required string snippet = 3;
+  required string url = 4;
+  optional string age = 5;
+  optional int64  timestamp = 6;
+}
+
+message CachedResult {
+  required string rowkey = 1;
+  required string keywords = 2;
+}
+
+message SearchRequest {
+  required string query = 1;
+  required int32  start = 2;
+  required int32  limit = 3;
+}
+
+message SearchResponse {
+  repeated SearchResult search_results = 1;
+}
+
+service SearchService {
+  rpc Search (SearchRequest) returns (SearchResponse);
+}
+
+
