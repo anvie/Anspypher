@@ -8,7 +8,7 @@
 
 
 find_path(ICE_INCLUDE_DIR Ice/Ice.h NO_DEFAULT_PATH PATHS
-	/usr/loca/include
+	/usr/local/include
 	/opt/local/include
 	/usr/include
 	/opt/include
@@ -45,7 +45,7 @@ endif()
 if (ICE_FOUND)
 	message(STATUS "Found Ice: ${ICE_LIBRARIES}")
 else()
-	message(FATAL_ERROR "Couldn't find Ice library")
+	message(FATAL_ERROR "Couldn't find Ice library. consider to fill ICE_ROOT_DIR")
 endif()
 
 

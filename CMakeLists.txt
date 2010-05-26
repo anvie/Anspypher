@@ -33,9 +33,7 @@ endif()
 
 FILE(GLOB CPPS src/*.c src/*.cpp src/*.h gen/*.cpp gen/*.h gen/*.cc)
 
-SET(SOURCES main.cpp ${CPPS})
-
-message(STATUS ${SOURCES})
+SET(SOURCES ${CPPS})
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
@@ -47,6 +45,7 @@ find_package(SIGAR REQUIRED)
 find_package(Readline REQUIRED)
 find_package(Hypertable REQUIRED)
 find_package(Tcmalloc)
+find_package(Gtest)
 
 INCLUDE_DIRECTORIES(
 	./
@@ -65,7 +64,7 @@ INCLUDE_DIRECTORIES(
 	${READLINE_INCLUDE_DIR}
 	)
 	
-
+SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY lib)
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
 	
 IF(WIN32)
@@ -75,10 +74,13 @@ IF(WIN32)
 		)
 ENDIF(WIN32)
 
+ADD_LIBRARY(libanspypher ${SOURCES})
 
-ADD_EXECUTABLE(anspypher ${SOURCES})
+ADD_EXECUTABLE(anspypher main.cpp)
+ADD_EXECUTABLE(test test.cpp)
 
-TARGET_LINK_LIBRARIES(anspypher
+set(ALL_LIBS
+
 	${Boost_LIBRARIES}
 	${ICE_LIBRARIES}
 	${LibEvent_LIBS}
@@ -91,7 +93,19 @@ TARGET_LINK_LIBRARIES(anspypher
 	ncurses
 	pthread
 	expat
+	libanspypher
+
 )
+
+SET_TARGET_PROPERTIES(test 
+	PROPERTIES 
+	COMPILE_FLAGS "-I${GTEST_INCLUDE_DIR}"
+	) 
+
+TARGET_LINK_LIBRARIES(anspypher ${ALL_LIBS})
+TARGET_LINK_LIBRARIES(test ${ALL_LIBS} ${GTEST_LIBRARIES})
+
+
 
 ADD_CUSTOM_TARGET(deploy
 	cp build/Debug/anspypher /opt/hypertable/current/bin/anspypher

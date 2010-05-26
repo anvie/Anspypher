@@ -18,7 +18,7 @@
 #define		EAN8(d)		(*(unsigned char*)(d))
 static volatile unsigned int shift_table[256];
 
-const char* an_bm_matcher( const unsigned int start_pos, const char* lp_source, size_t src_length, 
+const unsigned char* an_bm_matcher( const unsigned int start_pos, const char* lp_source, size_t src_length, 
 						  const char* lp_searchfor, size_t searchfor_length )
 {
 	
