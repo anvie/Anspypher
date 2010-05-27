@@ -10,7 +10,7 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
-namespace anspypher {
+namespace AnspypherPb {
 
 namespace {
 
@@ -148,16 +148,17 @@ void protobuf_AddDesc_anspypher_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\017anspypher.proto\022\tanspypher\"i\n\014SearchRe"
-    "sult\022\r\n\005title\030\001 \002(\t\022\014\n\004tags\030\002 \001(\t\022\017\n\007sni"
-    "ppet\030\003 \002(\t\022\013\n\003url\030\004 \002(\t\022\013\n\003age\030\005 \001(\t\022\021\n\t"
-    "timestamp\030\006 \001(\003\"0\n\014CachedResult\022\016\n\006rowke"
-    "y\030\001 \002(\t\022\020\n\010keywords\030\002 \002(\t\"<\n\rSearchReque"
-    "st\022\r\n\005query\030\001 \002(\t\022\r\n\005start\030\002 \002(\005\022\r\n\005limi"
-    "t\030\003 \002(\005\"A\n\016SearchResponse\022/\n\016search_resu"
-    "lts\030\001 \003(\0132\027.anspypher.SearchResult2N\n\rSe"
-    "archService\022=\n\006Search\022\030.anspypher.Search"
-    "Request\032\031.anspypher.SearchResponse", 394);
+    "\n\017anspypher.proto\022\013AnspypherPb\"i\n\014Search"
+    "Result\022\r\n\005title\030\001 \002(\t\022\014\n\004tags\030\002 \001(\t\022\017\n\007s"
+    "nippet\030\003 \002(\t\022\013\n\003url\030\004 \002(\t\022\013\n\003age\030\005 \001(\t\022\021"
+    "\n\ttimestamp\030\006 \001(\003\"0\n\014CachedResult\022\016\n\006row"
+    "key\030\001 \002(\t\022\020\n\010keywords\030\002 \002(\t\"<\n\rSearchReq"
+    "uest\022\r\n\005query\030\001 \002(\t\022\r\n\005start\030\002 \002(\005\022\r\n\005li"
+    "mit\030\003 \002(\005\"C\n\016SearchResponse\0221\n\016search_re"
+    "sults\030\001 \003(\0132\031.AnspypherPb.SearchResult2R"
+    "\n\rSearchService\022A\n\006Search\022\032.AnspypherPb."
+    "SearchRequest\032\033.AnspypherPb.SearchRespon"
+    "se", 402);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "anspypher.proto", &protobuf_RegisterTypes);
   SearchResult::default_instance_ = new SearchResult();
@@ -1333,7 +1334,7 @@ bool SearchResponse::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated .anspypher.SearchResult search_results = 1;
+      // repeated .AnspypherPb.SearchResult search_results = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -1366,7 +1367,7 @@ bool SearchResponse::MergePartialFromCodedStream(
 
 void SearchResponse::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // repeated .anspypher.SearchResult search_results = 1;
+  // repeated .AnspypherPb.SearchResult search_results = 1;
   for (int i = 0; i < this->search_results_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, this->search_results(i), output);
@@ -1380,7 +1381,7 @@ void SearchResponse::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* SearchResponse::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // repeated .anspypher.SearchResult search_results = 1;
+  // repeated .AnspypherPb.SearchResult search_results = 1;
   for (int i = 0; i < this->search_results_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -1397,7 +1398,7 @@ void SearchResponse::SerializeWithCachedSizes(
 int SearchResponse::ByteSize() const {
   int total_size = 0;
   
-  // repeated .anspypher.SearchResult search_results = 1;
+  // repeated .AnspypherPb.SearchResult search_results = 1;
   total_size += 1 * this->search_results_size();
   for (int i = 0; i < this->search_results_size(); i++) {
     total_size +=
@@ -1487,8 +1488,8 @@ const ::google::protobuf::ServiceDescriptor* SearchService::GetDescriptor() {
 }
 
 void SearchService::Search(::google::protobuf::RpcController* controller,
-                         const ::anspypher::SearchRequest*,
-                         ::anspypher::SearchResponse*,
+                         const ::AnspypherPb::SearchRequest*,
+                         ::AnspypherPb::SearchResponse*,
                          ::google::protobuf::Closure* done) {
   controller->SetFailed("Method Search() not implemented.");
   done->Run();
@@ -1503,8 +1504,8 @@ void SearchService::CallMethod(const ::google::protobuf::MethodDescriptor* metho
   switch(method->index()) {
     case 0:
       Search(controller,
-             ::google::protobuf::down_cast<const ::anspypher::SearchRequest*>(request),
-             ::google::protobuf::down_cast< ::anspypher::SearchResponse*>(response),
+             ::google::protobuf::down_cast<const ::AnspypherPb::SearchRequest*>(request),
+             ::google::protobuf::down_cast< ::AnspypherPb::SearchResponse*>(response),
              done);
       break;
     default:
@@ -1518,7 +1519,7 @@ const ::google::protobuf::Message& SearchService::GetRequestPrototype(
   GOOGLE_DCHECK_EQ(method->service(), descriptor());
   switch(method->index()) {
     case 0:
-      return ::anspypher::SearchRequest::default_instance();
+      return ::AnspypherPb::SearchRequest::default_instance();
     default:
       GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
       return *reinterpret_cast< ::google::protobuf::Message*>(NULL);
@@ -1530,7 +1531,7 @@ const ::google::protobuf::Message& SearchService::GetResponsePrototype(
   GOOGLE_DCHECK_EQ(method->service(), descriptor());
   switch(method->index()) {
     case 0:
-      return ::anspypher::SearchResponse::default_instance();
+      return ::AnspypherPb::SearchResponse::default_instance();
     default:
       GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
       return *reinterpret_cast< ::google::protobuf::Message*>(NULL);
@@ -1549,8 +1550,8 @@ SearchService_Stub::~SearchService_Stub() {
 }
 
 void SearchService_Stub::Search(::google::protobuf::RpcController* controller,
-                              const ::anspypher::SearchRequest* request,
-                              ::anspypher::SearchResponse* response,
+                              const ::AnspypherPb::SearchRequest* request,
+                              ::AnspypherPb::SearchResponse* response,
                               ::google::protobuf::Closure* done) {
   channel_->CallMethod(descriptor()->method(0),
                        controller, request, response, done);
@@ -1558,6 +1559,6 @@ void SearchService_Stub::Search(::google::protobuf::RpcController* controller,
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace anspypher
+}  // namespace AnspypherPb
 
 // @@protoc_insertion_point(global_scope)

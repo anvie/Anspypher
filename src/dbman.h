@@ -18,6 +18,7 @@
 
 #include <Hypertable/Lib/Client.h>
 #include <Hypertable/Lib/KeySpec.h>
+#include <boost/utility.hpp>
 
 #include "smartptr.h"
 
@@ -32,7 +33,7 @@ namespace Anspypher {
 	typedef Cells OneCell;
 	typedef list<OneCell> MultiCell;
 	
-	class DbManager {
+	class DbManager : boost::noncopyable {
 		
 	public:
 		DbManager();
@@ -45,7 +46,7 @@ namespace Anspypher {
 		void updateData(const string& table, const string& row, DbColName& colname, DbRecords& record);
 		bool deleteData(const string& table, const string& row);
 		bool createTable(const string& name, const string& schema);
-		bool dropTable(const string& name, bool check_result=false);
+		bool dropTable(const string& name, bool check_result);
 		bool dropTable(const string& name);
 		bool tableExists(const string& name);
 		bool rowExists(const string& tablename,const string& rowname);

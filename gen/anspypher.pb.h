@@ -26,7 +26,7 @@
 #include <google/protobuf/service.h>
 // @@protoc_insertion_point(includes)
 
-namespace anspypher {
+namespace AnspypherPb {
 
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_anspypher_2eproto();
@@ -151,7 +151,7 @@ class SearchResult : public ::google::protobuf::Message {
   inline ::google::protobuf::int64 timestamp() const;
   inline void set_timestamp(::google::protobuf::int64 value);
   
-  // @@protoc_insertion_point(class_scope:anspypher.SearchResult)
+  // @@protoc_insertion_point(class_scope:AnspypherPb.SearchResult)
  private:
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   mutable int _cached_size_;
@@ -263,7 +263,7 @@ class CachedResult : public ::google::protobuf::Message {
   inline void set_keywords(const char* value, size_t size);
   inline ::std::string* mutable_keywords();
   
-  // @@protoc_insertion_point(class_scope:anspypher.CachedResult)
+  // @@protoc_insertion_point(class_scope:AnspypherPb.CachedResult)
  private:
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   mutable int _cached_size_;
@@ -372,7 +372,7 @@ class SearchRequest : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 limit() const;
   inline void set_limit(::google::protobuf::int32 value);
   
-  // @@protoc_insertion_point(class_scope:anspypher.SearchRequest)
+  // @@protoc_insertion_point(class_scope:AnspypherPb.SearchRequest)
  private:
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   mutable int _cached_size_;
@@ -457,24 +457,24 @@ class SearchResponse : public ::google::protobuf::Message {
   
   // accessors -------------------------------------------------------
   
-  // repeated .anspypher.SearchResult search_results = 1;
+  // repeated .AnspypherPb.SearchResult search_results = 1;
   inline int search_results_size() const;
   inline void clear_search_results();
   static const int kSearchResultsFieldNumber = 1;
-  inline const ::anspypher::SearchResult& search_results(int index) const;
-  inline ::anspypher::SearchResult* mutable_search_results(int index);
-  inline ::anspypher::SearchResult* add_search_results();
-  inline const ::google::protobuf::RepeatedPtrField< ::anspypher::SearchResult >&
+  inline const ::AnspypherPb::SearchResult& search_results(int index) const;
+  inline ::AnspypherPb::SearchResult* mutable_search_results(int index);
+  inline ::AnspypherPb::SearchResult* add_search_results();
+  inline const ::google::protobuf::RepeatedPtrField< ::AnspypherPb::SearchResult >&
       search_results() const;
-  inline ::google::protobuf::RepeatedPtrField< ::anspypher::SearchResult >*
+  inline ::google::protobuf::RepeatedPtrField< ::AnspypherPb::SearchResult >*
       mutable_search_results();
   
-  // @@protoc_insertion_point(class_scope:anspypher.SearchResponse)
+  // @@protoc_insertion_point(class_scope:AnspypherPb.SearchResponse)
  private:
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   mutable int _cached_size_;
   
-  ::google::protobuf::RepeatedPtrField< ::anspypher::SearchResult > search_results_;
+  ::google::protobuf::RepeatedPtrField< ::AnspypherPb::SearchResult > search_results_;
   friend void  protobuf_AddDesc_anspypher_2eproto();
   friend void protobuf_AssignDesc_anspypher_2eproto();
   friend void protobuf_ShutdownFile_anspypher_2eproto();
@@ -511,8 +511,8 @@ class SearchService : public ::google::protobuf::Service {
   static const ::google::protobuf::ServiceDescriptor* descriptor();
   
   virtual void Search(::google::protobuf::RpcController* controller,
-                       const ::anspypher::SearchRequest* request,
-                       ::anspypher::SearchResponse* response,
+                       const ::AnspypherPb::SearchRequest* request,
+                       ::AnspypherPb::SearchResponse* response,
                        ::google::protobuf::Closure* done);
   
   // implements Service ----------------------------------------------
@@ -544,8 +544,8 @@ class SearchService_Stub : public SearchService {
   // implements SearchService ------------------------------------------
   
   void Search(::google::protobuf::RpcController* controller,
-                       const ::anspypher::SearchRequest* request,
-                       ::anspypher::SearchResponse* response,
+                       const ::AnspypherPb::SearchRequest* request,
+                       ::AnspypherPb::SearchResponse* response,
                        ::google::protobuf::Closure* done);
  private:
   ::google::protobuf::RpcChannel* channel_;
@@ -957,27 +957,27 @@ inline void SearchRequest::set_limit(::google::protobuf::int32 value) {
 
 // SearchResponse
 
-// repeated .anspypher.SearchResult search_results = 1;
+// repeated .AnspypherPb.SearchResult search_results = 1;
 inline int SearchResponse::search_results_size() const {
   return search_results_.size();
 }
 inline void SearchResponse::clear_search_results() {
   search_results_.Clear();
 }
-inline const ::anspypher::SearchResult& SearchResponse::search_results(int index) const {
+inline const ::AnspypherPb::SearchResult& SearchResponse::search_results(int index) const {
   return search_results_.Get(index);
 }
-inline ::anspypher::SearchResult* SearchResponse::mutable_search_results(int index) {
+inline ::AnspypherPb::SearchResult* SearchResponse::mutable_search_results(int index) {
   return search_results_.Mutable(index);
 }
-inline ::anspypher::SearchResult* SearchResponse::add_search_results() {
+inline ::AnspypherPb::SearchResult* SearchResponse::add_search_results() {
   return search_results_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::anspypher::SearchResult >&
+inline const ::google::protobuf::RepeatedPtrField< ::AnspypherPb::SearchResult >&
 SearchResponse::search_results() const {
   return search_results_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::anspypher::SearchResult >*
+inline ::google::protobuf::RepeatedPtrField< ::AnspypherPb::SearchResult >*
 SearchResponse::mutable_search_results() {
   return &search_results_;
 }
@@ -985,7 +985,7 @@ SearchResponse::mutable_search_results() {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace anspypher
+}  // namespace AnspypherPb
 
 #ifndef SWIG
 namespace google {

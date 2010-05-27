@@ -5,11 +5,12 @@
 
 module AnspypherIce {
 	
-	["cpp:protobuf:anspypher::SearchResponse"] sequence<byte> SearchResponse;
+	["cpp:protobuf:AnspypherPb::SearchResponse"] sequence<byte> SearchResponse;
 	
 	interface Printer {
        		 void printString(string s);
 	};
+	
 	interface Transporter {
 		void sendSR(SearchResponse sr);
 	};

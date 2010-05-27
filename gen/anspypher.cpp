@@ -17,7 +17,6 @@
 //
 // </auto-generated>
 
-#include <gen/anspypher.pb.h>
 #include <gen/anspypher.h>
 #include <Ice/LocalException.h>
 #include <Ice/ObjectFactory.h>
@@ -79,7 +78,7 @@ AnspypherIce::__read(::IceInternal::BasicStream* __is, ::AnspypherIce::Transport
 }
 
 void
-AnspypherIce::__writeSearchResponse(::IceInternal::BasicStream* __os, const anspypher::SearchResponse& v)
+AnspypherIce::__writeSearchResponse(::IceInternal::BasicStream* __os, const AnspypherPb::SearchResponse& v)
 {
     std::vector< ::Ice::Byte> data(v.ByteSize());
     if(!v.IsInitialized())
@@ -94,7 +93,7 @@ AnspypherIce::__writeSearchResponse(::IceInternal::BasicStream* __os, const ansp
 }
 
 void
-AnspypherIce::__readSearchResponse(::IceInternal::BasicStream* __is, anspypher::SearchResponse& v)
+AnspypherIce::__readSearchResponse(::IceInternal::BasicStream* __is, AnspypherPb::SearchResponse& v)
 {
     ::std::pair<const ::Ice::Byte*, const ::Ice::Byte*> data;
     __is->read(data);
@@ -179,7 +178,7 @@ IceProxy::AnspypherIce::Printer::__newInstance() const
 }
 
 void
-IceProxy::AnspypherIce::Transporter::sendSR(const anspypher::SearchResponse& sr, const ::Ice::Context* __ctx)
+IceProxy::AnspypherIce::Transporter::sendSR(const AnspypherPb::SearchResponse& sr, const ::Ice::Context* __ctx)
 {
     int __cnt = 0;
     while(true)
@@ -204,7 +203,7 @@ IceProxy::AnspypherIce::Transporter::sendSR(const anspypher::SearchResponse& sr,
 }
 
 ::Ice::AsyncResultPtr
-IceProxy::AnspypherIce::Transporter::begin_sendSR(const anspypher::SearchResponse& sr, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
+IceProxy::AnspypherIce::Transporter::begin_sendSR(const AnspypherPb::SearchResponse& sr, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
 {
     ::IceInternal::OutgoingAsyncPtr __result = new ::IceInternal::OutgoingAsync(this, __AnspypherIce__Transporter__sendSR_name, __del, __cookie);
     try
@@ -292,7 +291,7 @@ IceDelegateM::AnspypherIce::Printer::printString(const ::std::string& s, const :
 }
 
 void
-IceDelegateM::AnspypherIce::Transporter::sendSR(const anspypher::SearchResponse& sr, const ::Ice::Context* __context)
+IceDelegateM::AnspypherIce::Transporter::sendSR(const AnspypherPb::SearchResponse& sr, const ::Ice::Context* __context)
 {
     ::IceInternal::Outgoing __og(__handler.get(), __AnspypherIce__Transporter__sendSR_name, ::Ice::Normal, __context);
     try
@@ -395,13 +394,13 @@ IceDelegateD::AnspypherIce::Printer::printString(const ::std::string& s, const :
 }
 
 void
-IceDelegateD::AnspypherIce::Transporter::sendSR(const anspypher::SearchResponse& sr, const ::Ice::Context* __context)
+IceDelegateD::AnspypherIce::Transporter::sendSR(const AnspypherPb::SearchResponse& sr, const ::Ice::Context* __context)
 {
     class _DirectI : public ::IceInternal::Direct
     {
     public:
 
-        _DirectI(const anspypher::SearchResponse& sr, const ::Ice::Current& __current) : 
+        _DirectI(const AnspypherPb::SearchResponse& sr, const ::Ice::Current& __current) : 
             ::IceInternal::Direct(__current),
             _m_sr(sr)
         {
@@ -421,7 +420,7 @@ IceDelegateD::AnspypherIce::Transporter::sendSR(const anspypher::SearchResponse&
         
     private:
         
-        const anspypher::SearchResponse& _m_sr;
+        const AnspypherPb::SearchResponse& _m_sr;
     };
     
     ::Ice::Current __current;
@@ -658,7 +657,7 @@ AnspypherIce::Transporter::___sendSR(::IceInternal::Incoming& __inS, const ::Ice
     __checkMode(::Ice::Normal, __current.mode);
     ::IceInternal::BasicStream* __is = __inS.is();
     __is->startReadEncaps();
-    anspypher::SearchResponse sr;
+    AnspypherPb::SearchResponse sr;
     ::AnspypherIce::__readSearchResponse(__is, sr);
     __is->endReadEncaps();
     sendSR(sr, __current);

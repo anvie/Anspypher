@@ -1,5 +1,5 @@
 
-package anspypher;
+package AnspypherPb;
 
 message SearchResult {
   required string title = 1;

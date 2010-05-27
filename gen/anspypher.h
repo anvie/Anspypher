@@ -33,6 +33,7 @@
 #include <Ice/Direct.h>
 #include <IceUtil/ScopedArray.h>
 #include <Ice/UndefSysMacros.h>
+#include <gen/anspypher.pb.h>
 
 #ifndef ICE_IGNORE_VERSION
 #   if ICE_INT_VERSION / 100 != 304
@@ -104,8 +105,8 @@ void __patch__TransporterPtr(void*, ::Ice::ObjectPtr&);
 namespace AnspypherIce
 {
 
-void __writeSearchResponse(::IceInternal::BasicStream*, const anspypher::SearchResponse&);
-void __readSearchResponse(::IceInternal::BasicStream*, anspypher::SearchResponse&);
+void __writeSearchResponse(::IceInternal::BasicStream*, const AnspypherPb::SearchResponse&);
+void __readSearchResponse(::IceInternal::BasicStream*, AnspypherPb::SearchResponse&);
 
 }
 
@@ -381,41 +382,41 @@ class Transporter : virtual public ::IceProxy::Ice::Object
 {
 public:
 
-    void sendSR(const anspypher::SearchResponse& sr)
+    void sendSR(const AnspypherPb::SearchResponse& sr)
     {
         sendSR(sr, 0);
     }
-    void sendSR(const anspypher::SearchResponse& sr, const ::Ice::Context& __ctx)
+    void sendSR(const AnspypherPb::SearchResponse& sr, const ::Ice::Context& __ctx)
     {
         sendSR(sr, &__ctx);
     }
 
-    ::Ice::AsyncResultPtr begin_sendSR(const anspypher::SearchResponse& sr)
+    ::Ice::AsyncResultPtr begin_sendSR(const AnspypherPb::SearchResponse& sr)
     {
         return begin_sendSR(sr, 0, ::IceInternal::__dummyCallback, 0);
     }
 
-    ::Ice::AsyncResultPtr begin_sendSR(const anspypher::SearchResponse& sr, const ::Ice::Context& __ctx)
+    ::Ice::AsyncResultPtr begin_sendSR(const AnspypherPb::SearchResponse& sr, const ::Ice::Context& __ctx)
     {
         return begin_sendSR(sr, &__ctx, ::IceInternal::__dummyCallback, 0);
     }
 
-    ::Ice::AsyncResultPtr begin_sendSR(const anspypher::SearchResponse& sr, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    ::Ice::AsyncResultPtr begin_sendSR(const AnspypherPb::SearchResponse& sr, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
     {
         return begin_sendSR(sr, 0, __del, __cookie);
     }
 
-    ::Ice::AsyncResultPtr begin_sendSR(const anspypher::SearchResponse& sr, const ::Ice::Context& __ctx, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    ::Ice::AsyncResultPtr begin_sendSR(const AnspypherPb::SearchResponse& sr, const ::Ice::Context& __ctx, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
     {
         return begin_sendSR(sr, &__ctx, __del, __cookie);
     }
 
-    ::Ice::AsyncResultPtr begin_sendSR(const anspypher::SearchResponse& sr, const ::AnspypherIce::Callback_Transporter_sendSRPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    ::Ice::AsyncResultPtr begin_sendSR(const AnspypherPb::SearchResponse& sr, const ::AnspypherIce::Callback_Transporter_sendSRPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
     {
         return begin_sendSR(sr, 0, __del, __cookie);
     }
 
-    ::Ice::AsyncResultPtr begin_sendSR(const anspypher::SearchResponse& sr, const ::Ice::Context& __ctx, const ::AnspypherIce::Callback_Transporter_sendSRPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    ::Ice::AsyncResultPtr begin_sendSR(const AnspypherPb::SearchResponse& sr, const ::Ice::Context& __ctx, const ::AnspypherIce::Callback_Transporter_sendSRPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
     {
         return begin_sendSR(sr, &__ctx, __del, __cookie);
     }
@@ -424,8 +425,8 @@ public:
     
 private:
 
-    void sendSR(const anspypher::SearchResponse&, const ::Ice::Context*);
-    ::Ice::AsyncResultPtr begin_sendSR(const anspypher::SearchResponse&, const ::Ice::Context*, const ::IceInternal::CallbackBasePtr&, const ::Ice::LocalObjectPtr& __cookie = 0);
+    void sendSR(const AnspypherPb::SearchResponse&, const ::Ice::Context*);
+    ::Ice::AsyncResultPtr begin_sendSR(const AnspypherPb::SearchResponse&, const ::Ice::Context*, const ::IceInternal::CallbackBasePtr&, const ::Ice::LocalObjectPtr& __cookie = 0);
     
 public:
     
@@ -649,7 +650,7 @@ class Transporter : virtual public ::IceDelegate::Ice::Object
 {
 public:
 
-    virtual void sendSR(const anspypher::SearchResponse&, const ::Ice::Context*) = 0;
+    virtual void sendSR(const AnspypherPb::SearchResponse&, const ::Ice::Context*) = 0;
 };
 
 }
@@ -675,7 +676,7 @@ class Transporter : virtual public ::IceDelegate::AnspypherIce::Transporter,
 {
 public:
 
-    virtual void sendSR(const anspypher::SearchResponse&, const ::Ice::Context*);
+    virtual void sendSR(const AnspypherPb::SearchResponse&, const ::Ice::Context*);
 };
 
 }
@@ -701,7 +702,7 @@ class Transporter : virtual public ::IceDelegate::AnspypherIce::Transporter,
 {
 public:
 
-    virtual void sendSR(const anspypher::SearchResponse&, const ::Ice::Context*);
+    virtual void sendSR(const AnspypherPb::SearchResponse&, const ::Ice::Context*);
 };
 
 }
@@ -763,7 +764,7 @@ public:
     virtual const ::std::string& ice_id(const ::Ice::Current& = ::Ice::Current()) const;
     static const ::std::string& ice_staticId();
 
-    virtual void sendSR(const anspypher::SearchResponse&, const ::Ice::Current& = ::Ice::Current()) = 0;
+    virtual void sendSR(const AnspypherPb::SearchResponse&, const ::Ice::Current& = ::Ice::Current()) = 0;
     ::Ice::DispatchStatus ___sendSR(::IceInternal::Incoming&, const ::Ice::Current&);
 
     virtual ::Ice::DispatchStatus __dispatch(::IceInternal::Incoming&, const ::Ice::Current&);

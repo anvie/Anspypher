@@ -53,21 +53,31 @@ TEST(Database,ConnectionTest){
 		dbman.dropTable(table_name);
 	}
 	
+}
+
+TEST(Database,ManipulationTest){
+	
+	using namespace Anspypher;
+	
+	const string table_name = "UnitTest";
+	
+	DbManager dbman;
+	
 	// create table test
 	EXPECT_TRUE(
-	dbman.createTable("UnitTest","<Schema>"
-											"<AccessGroup name=\"default\">"
-											"<ColumnFamily>"
-											"<Name>nama</Name>"
-											"<deleted>false</deleted>"
-											"</ColumnFamily>"
-											"<ColumnFamily>"
-											"<Name>alamat</Name>"
-											"<deleted>false</deleted>"
-											"</ColumnFamily>"
-											"</AccessGroup>"
-											"</Schema>")
-	);
+							dbman.createTable("UnitTest","<Schema>"
+																"<AccessGroup name=\"default\">"
+																"<ColumnFamily>"
+																"<Name>nama</Name>"
+																"<deleted>false</deleted>"
+																"</ColumnFamily>"
+																"<ColumnFamily>"
+																"<Name>alamat</Name>"
+																"<deleted>false</deleted>"
+																"</ColumnFamily>"
+																"</AccessGroup>"
+																"</Schema>")
+							);
 	
 	// insert data test
 	DbColName colname;
@@ -86,7 +96,7 @@ TEST(Database,ConnectionTest){
 	
 }
 
-TEST(Database,ConnectionTest2)
+TEST(Database,DropTableTest)
 {
 	using namespace Anspypher;
 	const string table_name = "UnitTest";
