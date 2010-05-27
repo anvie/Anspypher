@@ -33,7 +33,6 @@
 #include <Ice/Direct.h>
 #include <IceUtil/ScopedArray.h>
 #include <Ice/UndefSysMacros.h>
-#include <gen/anspypher.pb.h>
 
 #ifndef ICE_IGNORE_VERSION
 #   if ICE_INT_VERSION / 100 != 304
@@ -50,7 +49,7 @@
 namespace IceProxy
 {
 
-namespace Demo
+namespace AnspypherIce
 {
 
 class Printer;
@@ -61,7 +60,7 @@ class Transporter;
 
 }
 
-namespace Demo
+namespace AnspypherIce
 {
 
 class Printer;
@@ -77,32 +76,32 @@ bool operator<(const Transporter&, const Transporter&);
 namespace IceInternal
 {
 
-::Ice::Object* upCast(::Demo::Printer*);
-::IceProxy::Ice::Object* upCast(::IceProxy::Demo::Printer*);
+::Ice::Object* upCast(::AnspypherIce::Printer*);
+::IceProxy::Ice::Object* upCast(::IceProxy::AnspypherIce::Printer*);
 
-::Ice::Object* upCast(::Demo::Transporter*);
-::IceProxy::Ice::Object* upCast(::IceProxy::Demo::Transporter*);
+::Ice::Object* upCast(::AnspypherIce::Transporter*);
+::IceProxy::Ice::Object* upCast(::IceProxy::AnspypherIce::Transporter*);
 
 }
 
-namespace Demo
+namespace AnspypherIce
 {
 
-typedef ::IceInternal::Handle< ::Demo::Printer> PrinterPtr;
-typedef ::IceInternal::ProxyHandle< ::IceProxy::Demo::Printer> PrinterPrx;
+typedef ::IceInternal::Handle< ::AnspypherIce::Printer> PrinterPtr;
+typedef ::IceInternal::ProxyHandle< ::IceProxy::AnspypherIce::Printer> PrinterPrx;
 
 void __read(::IceInternal::BasicStream*, PrinterPrx&);
 void __patch__PrinterPtr(void*, ::Ice::ObjectPtr&);
 
-typedef ::IceInternal::Handle< ::Demo::Transporter> TransporterPtr;
-typedef ::IceInternal::ProxyHandle< ::IceProxy::Demo::Transporter> TransporterPrx;
+typedef ::IceInternal::Handle< ::AnspypherIce::Transporter> TransporterPtr;
+typedef ::IceInternal::ProxyHandle< ::IceProxy::AnspypherIce::Transporter> TransporterPrx;
 
 void __read(::IceInternal::BasicStream*, TransporterPrx&);
 void __patch__TransporterPtr(void*, ::Ice::ObjectPtr&);
 
 }
 
-namespace Demo
+namespace AnspypherIce
 {
 
 void __writeSearchResponse(::IceInternal::BasicStream*, const anspypher::SearchResponse&);
@@ -110,7 +109,7 @@ void __readSearchResponse(::IceInternal::BasicStream*, anspypher::SearchResponse
 
 }
 
-namespace Demo
+namespace AnspypherIce
 {
 
 class Callback_Printer_printString_Base : virtual public ::IceInternal::CallbackBase { };
@@ -124,7 +123,7 @@ typedef ::IceUtil::Handle< Callback_Transporter_sendSR_Base> Callback_Transporte
 namespace IceProxy
 {
 
-namespace Demo
+namespace AnspypherIce
 {
 
 class Printer : virtual public ::IceProxy::Ice::Object
@@ -160,12 +159,12 @@ public:
         return begin_printString(s, &__ctx, __del, __cookie);
     }
 
-    ::Ice::AsyncResultPtr begin_printString(const ::std::string& s, const ::Demo::Callback_Printer_printStringPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    ::Ice::AsyncResultPtr begin_printString(const ::std::string& s, const ::AnspypherIce::Callback_Printer_printStringPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
     {
         return begin_printString(s, 0, __del, __cookie);
     }
 
-    ::Ice::AsyncResultPtr begin_printString(const ::std::string& s, const ::Ice::Context& __ctx, const ::Demo::Callback_Printer_printStringPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    ::Ice::AsyncResultPtr begin_printString(const ::std::string& s, const ::Ice::Context& __ctx, const ::AnspypherIce::Callback_Printer_printStringPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
     {
         return begin_printString(s, &__ctx, __del, __cookie);
     }
@@ -411,12 +410,12 @@ public:
         return begin_sendSR(sr, &__ctx, __del, __cookie);
     }
 
-    ::Ice::AsyncResultPtr begin_sendSR(const anspypher::SearchResponse& sr, const ::Demo::Callback_Transporter_sendSRPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    ::Ice::AsyncResultPtr begin_sendSR(const anspypher::SearchResponse& sr, const ::AnspypherIce::Callback_Transporter_sendSRPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
     {
         return begin_sendSR(sr, 0, __del, __cookie);
     }
 
-    ::Ice::AsyncResultPtr begin_sendSR(const anspypher::SearchResponse& sr, const ::Ice::Context& __ctx, const ::Demo::Callback_Transporter_sendSRPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    ::Ice::AsyncResultPtr begin_sendSR(const anspypher::SearchResponse& sr, const ::Ice::Context& __ctx, const ::AnspypherIce::Callback_Transporter_sendSRPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
     {
         return begin_sendSR(sr, &__ctx, __del, __cookie);
     }
@@ -636,7 +635,7 @@ private:
 namespace IceDelegate
 {
 
-namespace Demo
+namespace AnspypherIce
 {
 
 class Printer : virtual public ::IceDelegate::Ice::Object
@@ -660,10 +659,10 @@ public:
 namespace IceDelegateM
 {
 
-namespace Demo
+namespace AnspypherIce
 {
 
-class Printer : virtual public ::IceDelegate::Demo::Printer,
+class Printer : virtual public ::IceDelegate::AnspypherIce::Printer,
                 virtual public ::IceDelegateM::Ice::Object
 {
 public:
@@ -671,7 +670,7 @@ public:
     virtual void printString(const ::std::string&, const ::Ice::Context*);
 };
 
-class Transporter : virtual public ::IceDelegate::Demo::Transporter,
+class Transporter : virtual public ::IceDelegate::AnspypherIce::Transporter,
                     virtual public ::IceDelegateM::Ice::Object
 {
 public:
@@ -686,10 +685,10 @@ public:
 namespace IceDelegateD
 {
 
-namespace Demo
+namespace AnspypherIce
 {
 
-class Printer : virtual public ::IceDelegate::Demo::Printer,
+class Printer : virtual public ::IceDelegate::AnspypherIce::Printer,
                 virtual public ::IceDelegateD::Ice::Object
 {
 public:
@@ -697,7 +696,7 @@ public:
     virtual void printString(const ::std::string&, const ::Ice::Context*);
 };
 
-class Transporter : virtual public ::IceDelegate::Demo::Transporter,
+class Transporter : virtual public ::IceDelegate::AnspypherIce::Transporter,
                     virtual public ::IceDelegateD::Ice::Object
 {
 public:
@@ -709,7 +708,7 @@ public:
 
 }
 
-namespace Demo
+namespace AnspypherIce
 {
 
 class Printer : virtual public ::Ice::Object
@@ -790,7 +789,7 @@ inline bool operator<(const Transporter& l, const Transporter& r)
 
 }
 
-namespace Demo
+namespace AnspypherIce
 {
 
 template<class T>

@@ -1,4 +1,12 @@
-
+/*
+ *  haszh.cpp
+ *  This file is part of Anspypher project
+ *
+ *  Created by Robin Marufi on 5/27/10.
+ *	Contact: r@nosql.asia
+ *  Copyright 2010 Anlab Software. All rights reserved.
+ *
+ */
 
 #include <vector>
 #include <boost/algorithm/string.hpp>

@@ -1,17 +1,17 @@
 /*
  *  dbman.cpp
- *  anspypher
+ *  The part of Anspypher project.
  *
  *  Created by Robin Marufi on 5/27/10.
- *  Copyright 2010 __MyCompanyName__. All rights reserved.
+ *	Contact: r@nosql.asia
+ *  Copyright 2010 Anlab Software. All rights reserved.
  *
  */
 
 #include "dbman.h"
 
 namespace Anspypher {
-	
-	
+
 	using namespace Hypertable;
 	using namespace std;
 	namespace popts = boost::program_options;
@@ -23,6 +23,10 @@ namespace Anspypher {
 		init();
 	}
 	
+	/**
+	 * Inisialisasi Database Client
+	 * static global.
+	 */
 	void DbManager::init()
 	{
 		if (client.get() == 0) {
@@ -30,6 +34,15 @@ namespace Anspypher {
 		}
 	}
 	
+	/**
+	 * To insert data.
+	 * \param table a table name.
+	 * \param row a row name used as key.
+	 * \param colname is a column family name.
+	 * \param record is a record to insert.
+	 * \return boolean. true if success otherwise false.
+	 * \sa insertData(const string& tablename, const string& row, DbColName& colname, DbRecords& records)
+	 */
 	bool DbManager::insertData(const string& table, const string& row, DbColName& colname, DbRecord& record)
 	{
 		TablePtr tbl;
@@ -56,6 +69,14 @@ namespace Anspypher {
 		return !mutator->need_retry();		
 	}
 	
+	/**
+	 * Same as insertData(const string& table, const string& row, DbColName& colname, DbRecord& record)
+	 * but with multiple records
+	 * \param tablename a table name.
+	 * \param row a row name.
+	 * \param colname a column name.
+	 * \param records list of DbRecord.
+	 */
 	bool DbManager::insertData(const string& tablename, const string& row, DbColName& colname, DbRecords& records)
 	{
 		TablePtr table;
@@ -80,6 +101,13 @@ namespace Anspypher {
 		return !mutator->need_retry();
 	}
 	
+	
+	/**
+	 * To delete a single data.
+	 * \param table a table name where data reside.
+	 * \param row row name to delete. warning! all column family will deleted also.
+	 * \return boolean, true if succeed otherwise false.
+	 */
 	bool DbManager::deleteData(const string& table, const string& row)
 	{
 		TablePtr tbl = client->open_table(table.c_str());
@@ -124,6 +152,13 @@ namespace Anspypher {
 		return cells;
 	}
 	
+	// test
+	/**
+	 * Create a table.
+	 * \param name a table name to create.
+	 * \param schema a XML schema to used for table creation.
+	 * \return boolean, true if succeed otherwise false.
+	 */
 	bool DbManager::createTable(const string& name, const string& schema)
 	{
 		assert(client);
@@ -135,14 +170,37 @@ namespace Anspypher {
 		}
 		return true;
 	}
-	
-	bool DbManager::dropTable(const string& name)
+
+	/**
+	 * Delete a table.
+	 * \param name a table name to delete.
+	 * \param check_result if set to false then no error checking performed
+	 *				so return always false. set to true to return a status.
+	 * \return boolean always false if check_result parameter is set to false, if not
+	 *				return true if succeed otherwise false.
+	 */
+	bool DbManager::dropTable(const string& name, bool check_result)
 	{
 		assert(client);
 		client->drop_table( name, true );
-		return !tableExists( name );
+		if (check_result) {
+			return !tableExists(name);
+		}
+		return false;
 	}
 	
+	//! same as dropTable(const string& name, bool check_result) \n but will always check a result
+	bool DbManager::dropTable(const string& name)
+	{
+		assert(client);
+		return dropTable(name, true);
+	}
+
+	/**
+	 * Check if table already exists in database.
+	 * \param name table name.
+	 * \return boolean. true if succeed otherwise false.
+	 */
 	bool DbManager::tableExists(const string& name)
 	{
 		bool rv = false;
@@ -153,6 +211,12 @@ namespace Anspypher {
 		return rv;
 	}
 	
+	/**
+	 * Find a row.
+	 * \param tablename name of table to find.
+	 * \param rowname name of row.
+	 * \return DbRecord.
+	 */
 	QuickWeakData<DbRecord>::type DbManager::findRow(const string& tablename,const string& rowname)
 	{
 		TablePtr tbl = client->open_table(tablename.c_str());
@@ -170,6 +234,12 @@ namespace Anspypher {
 		return dbrs;
 	}
 	
+	/**
+	 * Check if row exists.
+	 * \param tablename table name.
+	 * \param rowname row name.
+	 * \return boolean.
+	 */
 	bool DbManager::rowExists(const string& tablename,const string& rowname)
 	{
 		return findRow(tablename,rowname)->d->size() > 0;

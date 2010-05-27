@@ -17,6 +17,7 @@
 //
 // </auto-generated>
 
+#include <gen/anspypher.pb.h>
 #include <gen/anspypher.h>
 #include <Ice/LocalException.h>
 #include <Ice/ObjectFactory.h>
@@ -35,18 +36,18 @@
 #   endif
 #endif
 
-static const ::std::string __Demo__Printer__printString_name = "printString";
+static const ::std::string __AnspypherIce__Printer__printString_name = "printString";
 
-static const ::std::string __Demo__Transporter__sendSR_name = "sendSR";
+static const ::std::string __AnspypherIce__Transporter__sendSR_name = "sendSR";
 
-::Ice::Object* IceInternal::upCast(::Demo::Printer* p) { return p; }
-::IceProxy::Ice::Object* IceInternal::upCast(::IceProxy::Demo::Printer* p) { return p; }
+::Ice::Object* IceInternal::upCast(::AnspypherIce::Printer* p) { return p; }
+::IceProxy::Ice::Object* IceInternal::upCast(::IceProxy::AnspypherIce::Printer* p) { return p; }
 
-::Ice::Object* IceInternal::upCast(::Demo::Transporter* p) { return p; }
-::IceProxy::Ice::Object* IceInternal::upCast(::IceProxy::Demo::Transporter* p) { return p; }
+::Ice::Object* IceInternal::upCast(::AnspypherIce::Transporter* p) { return p; }
+::IceProxy::Ice::Object* IceInternal::upCast(::IceProxy::AnspypherIce::Transporter* p) { return p; }
 
 void
-Demo::__read(::IceInternal::BasicStream* __is, ::Demo::PrinterPrx& v)
+AnspypherIce::__read(::IceInternal::BasicStream* __is, ::AnspypherIce::PrinterPrx& v)
 {
     ::Ice::ObjectPrx proxy;
     __is->read(proxy);
@@ -56,13 +57,13 @@ Demo::__read(::IceInternal::BasicStream* __is, ::Demo::PrinterPrx& v)
     }
     else
     {
-        v = new ::IceProxy::Demo::Printer;
+        v = new ::IceProxy::AnspypherIce::Printer;
         v->__copyFrom(proxy);
     }
 }
 
 void
-Demo::__read(::IceInternal::BasicStream* __is, ::Demo::TransporterPrx& v)
+AnspypherIce::__read(::IceInternal::BasicStream* __is, ::AnspypherIce::TransporterPrx& v)
 {
     ::Ice::ObjectPrx proxy;
     __is->read(proxy);
@@ -72,13 +73,13 @@ Demo::__read(::IceInternal::BasicStream* __is, ::Demo::TransporterPrx& v)
     }
     else
     {
-        v = new ::IceProxy::Demo::Transporter;
+        v = new ::IceProxy::AnspypherIce::Transporter;
         v->__copyFrom(proxy);
     }
 }
 
 void
-Demo::__writeSearchResponse(::IceInternal::BasicStream* __os, const anspypher::SearchResponse& v)
+AnspypherIce::__writeSearchResponse(::IceInternal::BasicStream* __os, const anspypher::SearchResponse& v)
 {
     std::vector< ::Ice::Byte> data(v.ByteSize());
     if(!v.IsInitialized())
@@ -93,7 +94,7 @@ Demo::__writeSearchResponse(::IceInternal::BasicStream* __os, const anspypher::S
 }
 
 void
-Demo::__readSearchResponse(::IceInternal::BasicStream* __is, anspypher::SearchResponse& v)
+AnspypherIce::__readSearchResponse(::IceInternal::BasicStream* __is, anspypher::SearchResponse& v)
 {
     ::std::pair<const ::Ice::Byte*, const ::Ice::Byte*> data;
     __is->read(data);
@@ -104,7 +105,7 @@ Demo::__readSearchResponse(::IceInternal::BasicStream* __is, anspypher::SearchRe
 }
 
 void
-IceProxy::Demo::Printer::printString(const ::std::string& s, const ::Ice::Context* __ctx)
+IceProxy::AnspypherIce::Printer::printString(const ::std::string& s, const ::Ice::Context* __ctx)
 {
     int __cnt = 0;
     while(true)
@@ -113,7 +114,7 @@ IceProxy::Demo::Printer::printString(const ::std::string& s, const ::Ice::Contex
         try
         {
             __delBase = __getDelegate(false);
-            ::IceDelegate::Demo::Printer* __del = dynamic_cast< ::IceDelegate::Demo::Printer*>(__delBase.get());
+            ::IceDelegate::AnspypherIce::Printer* __del = dynamic_cast< ::IceDelegate::AnspypherIce::Printer*>(__delBase.get());
             __del->printString(s, __ctx);
             return;
         }
@@ -129,12 +130,12 @@ IceProxy::Demo::Printer::printString(const ::std::string& s, const ::Ice::Contex
 }
 
 ::Ice::AsyncResultPtr
-IceProxy::Demo::Printer::begin_printString(const ::std::string& s, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
+IceProxy::AnspypherIce::Printer::begin_printString(const ::std::string& s, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
 {
-    ::IceInternal::OutgoingAsyncPtr __result = new ::IceInternal::OutgoingAsync(this, __Demo__Printer__printString_name, __del, __cookie);
+    ::IceInternal::OutgoingAsyncPtr __result = new ::IceInternal::OutgoingAsync(this, __AnspypherIce__Printer__printString_name, __del, __cookie);
     try
     {
-        __result->__prepare(__Demo__Printer__printString_name, ::Ice::Normal, __ctx);
+        __result->__prepare(__AnspypherIce__Printer__printString_name, ::Ice::Normal, __ctx);
         ::IceInternal::BasicStream* __os = __result->__getOs();
         __os->write(s);
         __os->endWriteEncaps();
@@ -148,37 +149,37 @@ IceProxy::Demo::Printer::begin_printString(const ::std::string& s, const ::Ice::
 }
 
 void
-IceProxy::Demo::Printer::end_printString(const ::Ice::AsyncResultPtr& __result)
+IceProxy::AnspypherIce::Printer::end_printString(const ::Ice::AsyncResultPtr& __result)
 {
-    __end(__result, __Demo__Printer__printString_name);
+    __end(__result, __AnspypherIce__Printer__printString_name);
 }
 
 const ::std::string&
-IceProxy::Demo::Printer::ice_staticId()
+IceProxy::AnspypherIce::Printer::ice_staticId()
 {
-    return ::Demo::Printer::ice_staticId();
+    return ::AnspypherIce::Printer::ice_staticId();
 }
 
 ::IceInternal::Handle< ::IceDelegateM::Ice::Object>
-IceProxy::Demo::Printer::__createDelegateM()
+IceProxy::AnspypherIce::Printer::__createDelegateM()
 {
-    return ::IceInternal::Handle< ::IceDelegateM::Ice::Object>(new ::IceDelegateM::Demo::Printer);
+    return ::IceInternal::Handle< ::IceDelegateM::Ice::Object>(new ::IceDelegateM::AnspypherIce::Printer);
 }
 
 ::IceInternal::Handle< ::IceDelegateD::Ice::Object>
-IceProxy::Demo::Printer::__createDelegateD()
+IceProxy::AnspypherIce::Printer::__createDelegateD()
 {
-    return ::IceInternal::Handle< ::IceDelegateD::Ice::Object>(new ::IceDelegateD::Demo::Printer);
+    return ::IceInternal::Handle< ::IceDelegateD::Ice::Object>(new ::IceDelegateD::AnspypherIce::Printer);
 }
 
 ::IceProxy::Ice::Object*
-IceProxy::Demo::Printer::__newInstance() const
+IceProxy::AnspypherIce::Printer::__newInstance() const
 {
     return new Printer;
 }
 
 void
-IceProxy::Demo::Transporter::sendSR(const anspypher::SearchResponse& sr, const ::Ice::Context* __ctx)
+IceProxy::AnspypherIce::Transporter::sendSR(const anspypher::SearchResponse& sr, const ::Ice::Context* __ctx)
 {
     int __cnt = 0;
     while(true)
@@ -187,7 +188,7 @@ IceProxy::Demo::Transporter::sendSR(const anspypher::SearchResponse& sr, const :
         try
         {
             __delBase = __getDelegate(false);
-            ::IceDelegate::Demo::Transporter* __del = dynamic_cast< ::IceDelegate::Demo::Transporter*>(__delBase.get());
+            ::IceDelegate::AnspypherIce::Transporter* __del = dynamic_cast< ::IceDelegate::AnspypherIce::Transporter*>(__delBase.get());
             __del->sendSR(sr, __ctx);
             return;
         }
@@ -203,14 +204,14 @@ IceProxy::Demo::Transporter::sendSR(const anspypher::SearchResponse& sr, const :
 }
 
 ::Ice::AsyncResultPtr
-IceProxy::Demo::Transporter::begin_sendSR(const anspypher::SearchResponse& sr, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
+IceProxy::AnspypherIce::Transporter::begin_sendSR(const anspypher::SearchResponse& sr, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
 {
-    ::IceInternal::OutgoingAsyncPtr __result = new ::IceInternal::OutgoingAsync(this, __Demo__Transporter__sendSR_name, __del, __cookie);
+    ::IceInternal::OutgoingAsyncPtr __result = new ::IceInternal::OutgoingAsync(this, __AnspypherIce__Transporter__sendSR_name, __del, __cookie);
     try
     {
-        __result->__prepare(__Demo__Transporter__sendSR_name, ::Ice::Normal, __ctx);
+        __result->__prepare(__AnspypherIce__Transporter__sendSR_name, ::Ice::Normal, __ctx);
         ::IceInternal::BasicStream* __os = __result->__getOs();
-        ::Demo::__writeSearchResponse(__os, sr);
+        ::AnspypherIce::__writeSearchResponse(__os, sr);
         __os->endWriteEncaps();
         __result->__send(true);
     }
@@ -222,39 +223,39 @@ IceProxy::Demo::Transporter::begin_sendSR(const anspypher::SearchResponse& sr, c
 }
 
 void
-IceProxy::Demo::Transporter::end_sendSR(const ::Ice::AsyncResultPtr& __result)
+IceProxy::AnspypherIce::Transporter::end_sendSR(const ::Ice::AsyncResultPtr& __result)
 {
-    __end(__result, __Demo__Transporter__sendSR_name);
+    __end(__result, __AnspypherIce__Transporter__sendSR_name);
 }
 
 const ::std::string&
-IceProxy::Demo::Transporter::ice_staticId()
+IceProxy::AnspypherIce::Transporter::ice_staticId()
 {
-    return ::Demo::Transporter::ice_staticId();
+    return ::AnspypherIce::Transporter::ice_staticId();
 }
 
 ::IceInternal::Handle< ::IceDelegateM::Ice::Object>
-IceProxy::Demo::Transporter::__createDelegateM()
+IceProxy::AnspypherIce::Transporter::__createDelegateM()
 {
-    return ::IceInternal::Handle< ::IceDelegateM::Ice::Object>(new ::IceDelegateM::Demo::Transporter);
+    return ::IceInternal::Handle< ::IceDelegateM::Ice::Object>(new ::IceDelegateM::AnspypherIce::Transporter);
 }
 
 ::IceInternal::Handle< ::IceDelegateD::Ice::Object>
-IceProxy::Demo::Transporter::__createDelegateD()
+IceProxy::AnspypherIce::Transporter::__createDelegateD()
 {
-    return ::IceInternal::Handle< ::IceDelegateD::Ice::Object>(new ::IceDelegateD::Demo::Transporter);
+    return ::IceInternal::Handle< ::IceDelegateD::Ice::Object>(new ::IceDelegateD::AnspypherIce::Transporter);
 }
 
 ::IceProxy::Ice::Object*
-IceProxy::Demo::Transporter::__newInstance() const
+IceProxy::AnspypherIce::Transporter::__newInstance() const
 {
     return new Transporter;
 }
 
 void
-IceDelegateM::Demo::Printer::printString(const ::std::string& s, const ::Ice::Context* __context)
+IceDelegateM::AnspypherIce::Printer::printString(const ::std::string& s, const ::Ice::Context* __context)
 {
-    ::IceInternal::Outgoing __og(__handler.get(), __Demo__Printer__printString_name, ::Ice::Normal, __context);
+    ::IceInternal::Outgoing __og(__handler.get(), __AnspypherIce__Printer__printString_name, ::Ice::Normal, __context);
     try
     {
         ::IceInternal::BasicStream* __os = __og.os();
@@ -291,13 +292,13 @@ IceDelegateM::Demo::Printer::printString(const ::std::string& s, const ::Ice::Co
 }
 
 void
-IceDelegateM::Demo::Transporter::sendSR(const anspypher::SearchResponse& sr, const ::Ice::Context* __context)
+IceDelegateM::AnspypherIce::Transporter::sendSR(const anspypher::SearchResponse& sr, const ::Ice::Context* __context)
 {
-    ::IceInternal::Outgoing __og(__handler.get(), __Demo__Transporter__sendSR_name, ::Ice::Normal, __context);
+    ::IceInternal::Outgoing __og(__handler.get(), __AnspypherIce__Transporter__sendSR_name, ::Ice::Normal, __context);
     try
     {
         ::IceInternal::BasicStream* __os = __og.os();
-        ::Demo::__writeSearchResponse(__os, sr);
+        ::AnspypherIce::__writeSearchResponse(__os, sr);
     }
     catch(const ::Ice::LocalException& __ex)
     {
@@ -330,7 +331,7 @@ IceDelegateM::Demo::Transporter::sendSR(const anspypher::SearchResponse& sr, con
 }
 
 void
-IceDelegateD::Demo::Printer::printString(const ::std::string& s, const ::Ice::Context* __context)
+IceDelegateD::AnspypherIce::Printer::printString(const ::std::string& s, const ::Ice::Context* __context)
 {
     class _DirectI : public ::IceInternal::Direct
     {
@@ -345,7 +346,7 @@ IceDelegateD::Demo::Printer::printString(const ::std::string& s, const ::Ice::Co
         virtual ::Ice::DispatchStatus
         run(::Ice::Object* object)
         {
-            ::Demo::Printer* servant = dynamic_cast< ::Demo::Printer*>(object);
+            ::AnspypherIce::Printer* servant = dynamic_cast< ::AnspypherIce::Printer*>(object);
             if(!servant)
             {
                 throw ::Ice::OperationNotExistException(__FILE__, __LINE__, _current.id, _current.facet, _current.operation);
@@ -360,7 +361,7 @@ IceDelegateD::Demo::Printer::printString(const ::std::string& s, const ::Ice::Co
     };
     
     ::Ice::Current __current;
-    __initCurrent(__current, __Demo__Printer__printString_name, ::Ice::Normal, __context);
+    __initCurrent(__current, __AnspypherIce__Printer__printString_name, ::Ice::Normal, __context);
     try
     {
         _DirectI __direct(s, __current);
@@ -394,7 +395,7 @@ IceDelegateD::Demo::Printer::printString(const ::std::string& s, const ::Ice::Co
 }
 
 void
-IceDelegateD::Demo::Transporter::sendSR(const anspypher::SearchResponse& sr, const ::Ice::Context* __context)
+IceDelegateD::AnspypherIce::Transporter::sendSR(const anspypher::SearchResponse& sr, const ::Ice::Context* __context)
 {
     class _DirectI : public ::IceInternal::Direct
     {
@@ -409,7 +410,7 @@ IceDelegateD::Demo::Transporter::sendSR(const anspypher::SearchResponse& sr, con
         virtual ::Ice::DispatchStatus
         run(::Ice::Object* object)
         {
-            ::Demo::Transporter* servant = dynamic_cast< ::Demo::Transporter*>(object);
+            ::AnspypherIce::Transporter* servant = dynamic_cast< ::AnspypherIce::Transporter*>(object);
             if(!servant)
             {
                 throw ::Ice::OperationNotExistException(__FILE__, __LINE__, _current.id, _current.facet, _current.operation);
@@ -424,7 +425,7 @@ IceDelegateD::Demo::Transporter::sendSR(const anspypher::SearchResponse& sr, con
     };
     
     ::Ice::Current __current;
-    __initCurrent(__current, __Demo__Transporter__sendSR_name, ::Ice::Normal, __context);
+    __initCurrent(__current, __AnspypherIce__Transporter__sendSR_name, ::Ice::Normal, __context);
     try
     {
         _DirectI __direct(sr, __current);
@@ -458,44 +459,44 @@ IceDelegateD::Demo::Transporter::sendSR(const anspypher::SearchResponse& sr, con
 }
 
 ::Ice::ObjectPtr
-Demo::Printer::ice_clone() const
+AnspypherIce::Printer::ice_clone() const
 {
     throw ::Ice::CloneNotImplementedException(__FILE__, __LINE__);
     return 0; // to avoid a warning with some compilers
 }
 
-static const ::std::string __Demo__Printer_ids[2] =
+static const ::std::string __AnspypherIce__Printer_ids[2] =
 {
-    "::Demo::Printer",
+    "::AnspypherIce::Printer",
     "::Ice::Object"
 };
 
 bool
-Demo::Printer::ice_isA(const ::std::string& _s, const ::Ice::Current&) const
+AnspypherIce::Printer::ice_isA(const ::std::string& _s, const ::Ice::Current&) const
 {
-    return ::std::binary_search(__Demo__Printer_ids, __Demo__Printer_ids + 2, _s);
+    return ::std::binary_search(__AnspypherIce__Printer_ids, __AnspypherIce__Printer_ids + 2, _s);
 }
 
 ::std::vector< ::std::string>
-Demo::Printer::ice_ids(const ::Ice::Current&) const
+AnspypherIce::Printer::ice_ids(const ::Ice::Current&) const
 {
-    return ::std::vector< ::std::string>(&__Demo__Printer_ids[0], &__Demo__Printer_ids[2]);
+    return ::std::vector< ::std::string>(&__AnspypherIce__Printer_ids[0], &__AnspypherIce__Printer_ids[2]);
 }
 
 const ::std::string&
-Demo::Printer::ice_id(const ::Ice::Current&) const
+AnspypherIce::Printer::ice_id(const ::Ice::Current&) const
 {
-    return __Demo__Printer_ids[0];
+    return __AnspypherIce__Printer_ids[0];
 }
 
 const ::std::string&
-Demo::Printer::ice_staticId()
+AnspypherIce::Printer::ice_staticId()
 {
-    return __Demo__Printer_ids[0];
+    return __AnspypherIce__Printer_ids[0];
 }
 
 ::Ice::DispatchStatus
-Demo::Printer::___printString(::IceInternal::Incoming& __inS, const ::Ice::Current& __current)
+AnspypherIce::Printer::___printString(::IceInternal::Incoming& __inS, const ::Ice::Current& __current)
 {
     __checkMode(::Ice::Normal, __current.mode);
     ::IceInternal::BasicStream* __is = __inS.is();
@@ -507,7 +508,7 @@ Demo::Printer::___printString(::IceInternal::Incoming& __inS, const ::Ice::Curre
     return ::Ice::DispatchOK;
 }
 
-static ::std::string __Demo__Printer_all[] =
+static ::std::string __AnspypherIce__Printer_all[] =
 {
     "ice_id",
     "ice_ids",
@@ -517,15 +518,15 @@ static ::std::string __Demo__Printer_all[] =
 };
 
 ::Ice::DispatchStatus
-Demo::Printer::__dispatch(::IceInternal::Incoming& in, const ::Ice::Current& current)
+AnspypherIce::Printer::__dispatch(::IceInternal::Incoming& in, const ::Ice::Current& current)
 {
-    ::std::pair< ::std::string*, ::std::string*> r = ::std::equal_range(__Demo__Printer_all, __Demo__Printer_all + 5, current.operation);
+    ::std::pair< ::std::string*, ::std::string*> r = ::std::equal_range(__AnspypherIce__Printer_all, __AnspypherIce__Printer_all + 5, current.operation);
     if(r.first == r.second)
     {
         throw ::Ice::OperationNotExistException(__FILE__, __LINE__, current.id, current.facet, current.operation);
     }
 
-    switch(r.first - __Demo__Printer_all)
+    switch(r.first - __AnspypherIce__Printer_all)
     {
         case 0:
         {
@@ -554,7 +555,7 @@ Demo::Printer::__dispatch(::IceInternal::Incoming& in, const ::Ice::Current& cur
 }
 
 void
-Demo::Printer::__write(::IceInternal::BasicStream* __os) const
+AnspypherIce::Printer::__write(::IceInternal::BasicStream* __os) const
 {
     __os->writeTypeId(ice_staticId());
     __os->startWriteSlice();
@@ -567,7 +568,7 @@ Demo::Printer::__write(::IceInternal::BasicStream* __os) const
 }
 
 void
-Demo::Printer::__read(::IceInternal::BasicStream* __is, bool __rid)
+AnspypherIce::Printer::__read(::IceInternal::BasicStream* __is, bool __rid)
 {
     if(__rid)
     {
@@ -586,85 +587,85 @@ Demo::Printer::__read(::IceInternal::BasicStream* __is, bool __rid)
 // COMPILERFIX: Stream API is not supported with VC++ 6
 #if !defined(_MSC_VER) || (_MSC_VER >= 1300)
 void
-Demo::Printer::__write(const ::Ice::OutputStreamPtr&) const
+AnspypherIce::Printer::__write(const ::Ice::OutputStreamPtr&) const
 {
     Ice::MarshalException ex(__FILE__, __LINE__);
-    ex.reason = "type Demo::Printer was not generated with stream support";
+    ex.reason = "type AnspypherIce::Printer was not generated with stream support";
     throw ex;
 }
 
 void
-Demo::Printer::__read(const ::Ice::InputStreamPtr&, bool)
+AnspypherIce::Printer::__read(const ::Ice::InputStreamPtr&, bool)
 {
     Ice::MarshalException ex(__FILE__, __LINE__);
-    ex.reason = "type Demo::Printer was not generated with stream support";
+    ex.reason = "type AnspypherIce::Printer was not generated with stream support";
     throw ex;
 }
 #endif
 
 void 
-Demo::__patch__PrinterPtr(void* __addr, ::Ice::ObjectPtr& v)
+AnspypherIce::__patch__PrinterPtr(void* __addr, ::Ice::ObjectPtr& v)
 {
-    ::Demo::PrinterPtr* p = static_cast< ::Demo::PrinterPtr*>(__addr);
+    ::AnspypherIce::PrinterPtr* p = static_cast< ::AnspypherIce::PrinterPtr*>(__addr);
     assert(p);
-    *p = ::Demo::PrinterPtr::dynamicCast(v);
+    *p = ::AnspypherIce::PrinterPtr::dynamicCast(v);
     if(v && !*p)
     {
-        IceInternal::Ex::throwUOE(::Demo::Printer::ice_staticId(), v->ice_id());
+        IceInternal::Ex::throwUOE(::AnspypherIce::Printer::ice_staticId(), v->ice_id());
     }
 }
 
 ::Ice::ObjectPtr
-Demo::Transporter::ice_clone() const
+AnspypherIce::Transporter::ice_clone() const
 {
     throw ::Ice::CloneNotImplementedException(__FILE__, __LINE__);
     return 0; // to avoid a warning with some compilers
 }
 
-static const ::std::string __Demo__Transporter_ids[2] =
+static const ::std::string __AnspypherIce__Transporter_ids[2] =
 {
-    "::Demo::Transporter",
+    "::AnspypherIce::Transporter",
     "::Ice::Object"
 };
 
 bool
-Demo::Transporter::ice_isA(const ::std::string& _s, const ::Ice::Current&) const
+AnspypherIce::Transporter::ice_isA(const ::std::string& _s, const ::Ice::Current&) const
 {
-    return ::std::binary_search(__Demo__Transporter_ids, __Demo__Transporter_ids + 2, _s);
+    return ::std::binary_search(__AnspypherIce__Transporter_ids, __AnspypherIce__Transporter_ids + 2, _s);
 }
 
 ::std::vector< ::std::string>
-Demo::Transporter::ice_ids(const ::Ice::Current&) const
+AnspypherIce::Transporter::ice_ids(const ::Ice::Current&) const
 {
-    return ::std::vector< ::std::string>(&__Demo__Transporter_ids[0], &__Demo__Transporter_ids[2]);
+    return ::std::vector< ::std::string>(&__AnspypherIce__Transporter_ids[0], &__AnspypherIce__Transporter_ids[2]);
 }
 
 const ::std::string&
-Demo::Transporter::ice_id(const ::Ice::Current&) const
+AnspypherIce::Transporter::ice_id(const ::Ice::Current&) const
 {
-    return __Demo__Transporter_ids[0];
+    return __AnspypherIce__Transporter_ids[0];
 }
 
 const ::std::string&
-Demo::Transporter::ice_staticId()
+AnspypherIce::Transporter::ice_staticId()
 {
-    return __Demo__Transporter_ids[0];
+    return __AnspypherIce__Transporter_ids[0];
 }
 
 ::Ice::DispatchStatus
-Demo::Transporter::___sendSR(::IceInternal::Incoming& __inS, const ::Ice::Current& __current)
+AnspypherIce::Transporter::___sendSR(::IceInternal::Incoming& __inS, const ::Ice::Current& __current)
 {
     __checkMode(::Ice::Normal, __current.mode);
     ::IceInternal::BasicStream* __is = __inS.is();
     __is->startReadEncaps();
     anspypher::SearchResponse sr;
-    ::Demo::__readSearchResponse(__is, sr);
+    ::AnspypherIce::__readSearchResponse(__is, sr);
     __is->endReadEncaps();
     sendSR(sr, __current);
     return ::Ice::DispatchOK;
 }
 
-static ::std::string __Demo__Transporter_all[] =
+static ::std::string __AnspypherIce__Transporter_all[] =
 {
     "ice_id",
     "ice_ids",
@@ -674,15 +675,15 @@ static ::std::string __Demo__Transporter_all[] =
 };
 
 ::Ice::DispatchStatus
-Demo::Transporter::__dispatch(::IceInternal::Incoming& in, const ::Ice::Current& current)
+AnspypherIce::Transporter::__dispatch(::IceInternal::Incoming& in, const ::Ice::Current& current)
 {
-    ::std::pair< ::std::string*, ::std::string*> r = ::std::equal_range(__Demo__Transporter_all, __Demo__Transporter_all + 5, current.operation);
+    ::std::pair< ::std::string*, ::std::string*> r = ::std::equal_range(__AnspypherIce__Transporter_all, __AnspypherIce__Transporter_all + 5, current.operation);
     if(r.first == r.second)
     {
         throw ::Ice::OperationNotExistException(__FILE__, __LINE__, current.id, current.facet, current.operation);
     }
 
-    switch(r.first - __Demo__Transporter_all)
+    switch(r.first - __AnspypherIce__Transporter_all)
     {
         case 0:
         {
@@ -711,7 +712,7 @@ Demo::Transporter::__dispatch(::IceInternal::Incoming& in, const ::Ice::Current&
 }
 
 void
-Demo::Transporter::__write(::IceInternal::BasicStream* __os) const
+AnspypherIce::Transporter::__write(::IceInternal::BasicStream* __os) const
 {
     __os->writeTypeId(ice_staticId());
     __os->startWriteSlice();
@@ -724,7 +725,7 @@ Demo::Transporter::__write(::IceInternal::BasicStream* __os) const
 }
 
 void
-Demo::Transporter::__read(::IceInternal::BasicStream* __is, bool __rid)
+AnspypherIce::Transporter::__read(::IceInternal::BasicStream* __is, bool __rid)
 {
     if(__rid)
     {
@@ -743,30 +744,30 @@ Demo::Transporter::__read(::IceInternal::BasicStream* __is, bool __rid)
 // COMPILERFIX: Stream API is not supported with VC++ 6
 #if !defined(_MSC_VER) || (_MSC_VER >= 1300)
 void
-Demo::Transporter::__write(const ::Ice::OutputStreamPtr&) const
+AnspypherIce::Transporter::__write(const ::Ice::OutputStreamPtr&) const
 {
     Ice::MarshalException ex(__FILE__, __LINE__);
-    ex.reason = "type Demo::Transporter was not generated with stream support";
+    ex.reason = "type AnspypherIce::Transporter was not generated with stream support";
     throw ex;
 }
 
 void
-Demo::Transporter::__read(const ::Ice::InputStreamPtr&, bool)
+AnspypherIce::Transporter::__read(const ::Ice::InputStreamPtr&, bool)
 {
     Ice::MarshalException ex(__FILE__, __LINE__);
-    ex.reason = "type Demo::Transporter was not generated with stream support";
+    ex.reason = "type AnspypherIce::Transporter was not generated with stream support";
     throw ex;
 }
 #endif
 
 void 
-Demo::__patch__TransporterPtr(void* __addr, ::Ice::ObjectPtr& v)
+AnspypherIce::__patch__TransporterPtr(void* __addr, ::Ice::ObjectPtr& v)
 {
-    ::Demo::TransporterPtr* p = static_cast< ::Demo::TransporterPtr*>(__addr);
+    ::AnspypherIce::TransporterPtr* p = static_cast< ::AnspypherIce::TransporterPtr*>(__addr);
     assert(p);
-    *p = ::Demo::TransporterPtr::dynamicCast(v);
+    *p = ::AnspypherIce::TransporterPtr::dynamicCast(v);
     if(v && !*p)
     {
-        IceInternal::Ex::throwUOE(::Demo::Transporter::ice_staticId(), v->ice_id());
+        IceInternal::Ex::throwUOE(::AnspypherIce::Transporter::ice_staticId(), v->ice_id());
     }
 }

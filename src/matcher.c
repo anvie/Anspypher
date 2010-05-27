@@ -3,7 +3,8 @@
  *  anspypher
  *
  *  Created by Robin Marufi on 5/27/10.
- *  Copyright 2010 __MyCompanyName__. All rights reserved.
+ *	Contact: r@nosql.asia
+ *  Copyright 2010 Anlab Software. All rights reserved.
  *
  */
 

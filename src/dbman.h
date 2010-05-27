@@ -3,6 +3,7 @@
  *  anspypher
  *
  *  Created by Robin Marufi on 5/27/10.
+ *	Contact: r@nosql.asia
  *  Copyright 2010 Anlab Software. All rights reserved.
  *
  */
@@ -44,11 +45,15 @@ namespace Anspypher {
 		void updateData(const string& table, const string& row, DbColName& colname, DbRecords& record);
 		bool deleteData(const string& table, const string& row);
 		bool createTable(const string& name, const string& schema);
+		bool dropTable(const string& name, bool check_result=false);
 		bool dropTable(const string& name);
 		bool tableExists(const string& name);
 		bool rowExists(const string& tablename,const string& rowname);
 		QuickWeakData<DbRecord>::type findRow(const string& tablename,const string& rowname);
 		
+		/**
+		 * get native client.
+		 */
 		ClientPtr getClient() const { return this->client; };
 		
 		
@@ -63,11 +68,13 @@ namespace Anspypher {
 	inline DbRecord& operator,(DbRecord& a,const string& s)
 	{
 		a.push_back(s);
+		return a;
 	}
 	
 	inline DbColName& operator,(DbColName& a,const string& s)
 	{
 		a.push_back(s);
+		return a;
 	}
 	
 

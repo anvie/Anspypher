@@ -3,7 +3,7 @@
 #ifndef __ANSPYPHER_ICE__
 #define __ANSPYPHER_ICE__
 
-module Demo {
+module AnspypherIce {
 	
 	["cpp:protobuf:anspypher::SearchResponse"] sequence<byte> SearchResponse;
 	

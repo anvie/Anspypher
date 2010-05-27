@@ -43,9 +43,15 @@ TEST(CoreEngine,Hashing){
 TEST(Database,ConnectionTest){
 	
 	using namespace Anspypher;
-	
-	bool rv = false;
+
 	DbManager dbman;
+	
+	const string table_name = "UnitTest";
+	
+	if (dbman.tableExists(table_name)) {
+		// drop first
+		dbman.dropTable(table_name);
+	}
 	
 	// create table test
 	EXPECT_TRUE(
@@ -65,17 +71,15 @@ TEST(Database,ConnectionTest){
 	
 	// insert data test
 	DbColName colname;
-	colname , "nama", "alamat";
+	colname,"nama","alamat";
 	
 	DbRecord rec;
-	rec , "obin", "wonosobo";
+	rec,"obin","wonosobo";
 	
-	cout << colname.front() << " " << colname.back() << endl;
-	
-	const string table_name = "UnitTest";
 	const string row = "test-ajah";
 	
 	EXPECT_TRUE(dbman.insertData(table_name,row,colname,rec));
+	
 	
 	// delete data test
 	EXPECT_TRUE(dbman.deleteData(table_name,row));

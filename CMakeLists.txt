@@ -105,7 +105,7 @@ SET_TARGET_PROPERTIES(test
 TARGET_LINK_LIBRARIES(anspypherd ${ALL_LIBS})
 TARGET_LINK_LIBRARIES(test ${ALL_LIBS} ${GTEST_LIBRARIES})
 
-
+ADD_CUSTOM_TARGET(generate_doc doxygen anspypher.cfg)
 
 ADD_CUSTOM_TARGET(deploy
 #	cp bin/anspypher /opt/hypertable/current/bin/anspypher

@@ -1,4 +1,12 @@
-
+/*
+ *  smartptr.h
+ *  This file is part of Anspypher project
+ *
+ *  Created by Robin Marufi on 5/27/10.
+ *	Contact: r@nosql.asia
+ *  Copyright 2010 Anlab Software. All rights reserved.
+ *
+ */
 
 #ifndef __SMARTPTR_H__
 # define __SMARTPTR_H__
