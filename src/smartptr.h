@@ -48,6 +48,17 @@ namespace Smartptr {
 		T d;
 	};
 	
+	template <class T>
+	class QuickWeakData : public ReferenceCount
+	{
+	public:
+		typedef intrusive_ptr< QuickWeakData > type;
+		QuickWeakData(T* d_): d(d_){};
+		~QuickWeakData(){ delete d; }
+		T* d;
+	};
+
+	
 } // namespace
 
 

@@ -74,9 +74,9 @@ IF(WIN32)
 		)
 ENDIF(WIN32)
 
-ADD_LIBRARY(libanspypher ${SOURCES})
+ADD_LIBRARY(anspypher ${SOURCES})
 
-ADD_EXECUTABLE(anspypher main.cpp)
+ADD_EXECUTABLE(anspypherd main.cpp)
 ADD_EXECUTABLE(test test.cpp)
 
 set(ALL_LIBS
@@ -93,7 +93,7 @@ set(ALL_LIBS
 	ncurses
 	pthread
 	expat
-	libanspypher
+	anspypher
 
 )
 
@@ -102,13 +102,15 @@ SET_TARGET_PROPERTIES(test
 	COMPILE_FLAGS "-I${GTEST_INCLUDE_DIR}"
 	) 
 
-TARGET_LINK_LIBRARIES(anspypher ${ALL_LIBS})
+TARGET_LINK_LIBRARIES(anspypherd ${ALL_LIBS})
 TARGET_LINK_LIBRARIES(test ${ALL_LIBS} ${GTEST_LIBRARIES})
 
 
 
 ADD_CUSTOM_TARGET(deploy
-	cp build/Debug/anspypher /opt/hypertable/current/bin/anspypher
+#	cp bin/anspypher /opt/hypertable/current/bin/anspypher
+	COMMAND cp bin/test			 /opt/hypertable/current/bin/test
+	DEPENDS test
 	)
 
 
