@@ -47,45 +47,6 @@ else ()
   endif ()
 endif ()
 
-try_run(BDB_CHECK SHOULD_COMPILE
-        ${HYPERTABLE_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/CMakeTmp
-        ${HYPERTABLE_SOURCE_DIR}/cmake/CheckBdb.cc
-        CMAKE_FLAGS -DINCLUDE_DIRECTORIES=${BDB_INCLUDE_DIR}
-                    -DLINK_LIBRARIES=${BDB_LIBRARIES}
-        OUTPUT_VARIABLE BDB_TRY_OUT)
-string(REGEX REPLACE ".*\n([0-9.]+).*" "\\1" BDB_VERSION ${BDB_TRY_OUT})
-string(REGEX REPLACE ".*\n(BerkeleyDB .*)" "\\1" BDB_VERSION ${BDB_VERSION})
-message(STATUS "Berkeley DB version: ${BDB_VERSION}")
-
-if (NOT BDB_CHECK STREQUAL "0")
-  message(FATAL_ERROR "Please fix the Berkeley DB installation, "
-          "remove CMakeCache.txt and try again.")
-endif ()
-
-STRING(REGEX REPLACE "^([0-9]+)\\.([0-9]+)\\.([0-9]+)" "\\1" MAJOR "${BDB_VERSION}")
-STRING(REGEX REPLACE "^([0-9]+)\\.([0-9]+)\\.([0-9]+)" "\\2" MINOR "${BDB_VERSION}")
-STRING(REGEX REPLACE "^([0-9]+)\\.([0-9]+)\\.([0-9]+)" "\\3" PATCH "${BDB_VERSION}")
-
-set(BDB_COMPATIBLE "NO")
-if (MAJOR MATCHES "^([5-9]|[1-9][0-9]+)" )
-  set(BDB_COMPATIBLE "YES")
-elseif(MAJOR MATCHES "^4$") 
-  if(MINOR MATCHES "^([9]|[1-9][0-9]+)")
-    set(BDB_COMPATIBLE "YES")
-  elseif(MINOR MATCHES "^8$") 
-    if(PATCH MATCHES "^([3-9][0-9]+)")
-      set(BDB_COMPATIBLE "YES")
-    elseif(PATCH MATCHES "^([2][4-9])")
-      set(BDB_COMPATIBLE "YES")
-    endif()
-  endif()
-endif()  
-
-if (NOT BDB_COMPATIBLE)
-  message(FATAL_ERROR "BerkeleyDB version >= 4.8.24 required." 
-          "Found version ${MAJOR}.${MINOR}.${PATCH}"
-          "Please fix the installation, remove CMakeCache.txt and try again.")
-endif()
 
 mark_as_advanced(
   BDB_LIBRARY

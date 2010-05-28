@@ -16,7 +16,7 @@ find_path(ICE_INCLUDE_DIR Ice/Ice.h NO_DEFAULT_PATH PATHS
 	$ENV{ICE_ROOT_DIR}/include
 	)
 	
-find_library(ICE_LIBRARY_ICE NAMES Ice.34 NO_DEFAULT_PATH PATHS
+find_library(ICE_LIBRARY_ICE NAMES Ice.34 Ice NO_DEFAULT_PATH PATHS
 	/usr/local/lib
 	/opt/local/lib
 	/usr/lib

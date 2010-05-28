@@ -25,7 +25,7 @@ ENDIF(MSVC)
 #MESSAGE(STATUS "CMAKE_C_FLAGS_DEBUG: ${CMAKE_C_FLAGS_DEBUG}")
 #MESSAGE(STATUS "CMAKE_CXX_FLAGS_DEBUG: ${CMAKE_CXX_FLAGS_DEBUG}")
 
-add_definitions(-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_REENTRANT)
+add_definitions(-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_REENTRANT -Wall -pedantic -Wno-long-long -Wno-variadic-macros -Wno-deprecated)
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 add_definitions(-DDEBUG -gdb)
@@ -46,14 +46,16 @@ find_package(Readline REQUIRED)
 find_package(Hypertable REQUIRED)
 find_package(Tcmalloc)
 find_package(Gtest)
+find_package(BerkeleyDB REQUIRED)
 
 INCLUDE_DIRECTORIES(
 	./
+	/usr/include
+	/opt/include
 	${Boost_INCLUDE_DIR}
 	/opt/local/include
 	/usr/local/include
 	/usr/local/BerkeleyDB.4.8/include
-	/opt/hypertable/current/include
 	${ICE_INCLUDE_DIR}
 	${LibEvent_INCLUDE_DIR}
 	${Log4cpp_INCLUDE_DIR}
@@ -62,6 +64,7 @@ INCLUDE_DIRECTORIES(
 	${HYPERTABLE_COMMON_INCLUDE_DIR}
 	${SIGAR_INCLUDE_DIR}
 	${READLINE_INCLUDE_DIR}
+	${Tcmalloc_INCLUDE_DIR}
 	)
 	
 SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY lib)
@@ -80,22 +83,20 @@ ADD_EXECUTABLE(anspypherd main.cpp)
 ADD_EXECUTABLE(test test.cpp)
 
 set(ALL_LIBS
-
+  anspypher
+  ${HYPERTABLE_LIBRARIES}
 	${Boost_LIBRARIES}
 	${ICE_LIBRARIES}
 	${LibEvent_LIBS}
 	${Log4cpp_LIBRARIES}
-	${PROTOBUF_LIBRARIES}
-	${HYPERTABLE_LIBRARIES}
 	${SIGAR_LIBRARIES}
 	${READLINE_LIBRARIES}
 	z
 	ncurses
 	pthread
 	expat
-	anspypher
-
-)
+	${PROTOBUF_LIBRARIES}
+	)
 
 SET_TARGET_PROPERTIES(test 
 	PROPERTIES 

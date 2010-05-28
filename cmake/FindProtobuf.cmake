@@ -8,7 +8,7 @@
 
 
 find_path(PROTOBUF_INCLUDE_DIR google/protobuf/generated_message_util.h NO_DEFAULT_PATH PATHS
-	/usr/loca/include
+	/usr/local/include
 	/opt/local/include
 	/usr/include
 	/opt/include
