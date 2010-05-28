@@ -27,20 +27,25 @@ const unsigned char* an_bm_matcher( const unsigned int start_pos, const char* lp
 	unsigned int cval;
 	unsigned int i;
 	unsigned char* el;
+	unsigned char* lps;
+	unsigned int dcv;
+	unsigned int tcval;
+	unsigned char* lpsrc;
+	unsigned char* lpsf;
 	
 	if ( searchfor_length < 1L ) return ( 0 );
 	
 	el=(unsigned char*)((lp_source + src_length) - searchfor_length);
 	
-	// persiapkan shift_table
+	/* persiapkan shift_table */
 	
 	for(i=0;i<(sizeof( shift_table ) / sizeof(unsigned int));i++)
 		shift_table[i]=searchfor_length;
 	
-	// load decending count
+	/* load decending count */
 	
-	unsigned char* lps=(unsigned char*)lp_searchfor;
-	unsigned int dcv=(unsigned int)searchfor_length;
+	lps=(unsigned char*)lp_searchfor;
+	dcv=(unsigned int)searchfor_length;
 	
 	while(dcv--)
 	{
@@ -50,10 +55,10 @@ const unsigned char* an_bm_matcher( const unsigned int start_pos, const char* lp
 	}
 	
 	cval = (unsigned int)(searchfor_length-1);
-	unsigned int tcval = cval;
+	tcval = cval;
 	
-	unsigned char* lpsrc = (unsigned char*) ( lp_source + start_pos  );
-	unsigned char* lpsf = (unsigned char*) lp_searchfor;
+	lpsrc = (unsigned char*) ( lp_source + start_pos  );
+	lpsf = (unsigned char*) lp_searchfor;
 	
 	for(;;)
 	{

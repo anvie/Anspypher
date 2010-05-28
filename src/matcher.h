@@ -16,12 +16,12 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif // __MATCHER_H__
+#endif 
 const unsigned char* an_bm_matcher(const unsigned int start_pos, const char* lp_source, size_t src_length, 
 						  const char* lp_searchfor, size_t searchfor_length);
 #ifdef __cplusplus
 }
 #endif
 
-#endif // __MATCHER_H__
+#endif 
 

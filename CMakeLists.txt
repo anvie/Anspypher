@@ -25,7 +25,7 @@ ENDIF(MSVC)
 #MESSAGE(STATUS "CMAKE_C_FLAGS_DEBUG: ${CMAKE_C_FLAGS_DEBUG}")
 #MESSAGE(STATUS "CMAKE_CXX_FLAGS_DEBUG: ${CMAKE_CXX_FLAGS_DEBUG}")
 
-add_definitions(-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_REENTRANT -Wall -pedantic -Wno-long-long -Wno-variadic-macros -Wno-deprecated)
+add_definitions(-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_REENTRANT -Wall -Wno-long-long -Wno-variadic-macros)
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 add_definitions(-DDEBUG -gdb)
@@ -91,11 +91,17 @@ set(ALL_LIBS
 	${Log4cpp_LIBRARIES}
 	${SIGAR_LIBRARIES}
 	${READLINE_LIBRARIES}
+	${Tcmalloc_LIBRARIES}
 	z
 	ncurses
 	pthread
 	expat
 	${PROTOBUF_LIBRARIES}
+	)
+
+SET_TARGET_PROPERTIES(anspypherd
+	PROPERTIES
+	COMPILE_FLAGS	-Wno-deprecated
 	)
 
 SET_TARGET_PROPERTIES(test 
