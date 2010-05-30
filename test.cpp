@@ -6,19 +6,24 @@
  */
 
 
-#include <Common/Compat.h>
 #include <stdio.h>
 #include <stdint.h>
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
 #include <gtest/gtest.h>
+
+#include <Common/Compat.h>
+#include <Common/Init.h>
+#include <AsyncComm/Config.h>
 
 #include "src/haszh.h"
 #include "src/keyword.h"
 #include "src/dbman.h"
 
-
+using namespace Hypertable;
+using namespace Hypertable::Config;
 using namespace std;
 
 
@@ -79,20 +84,56 @@ TEST(Database,ManipulationTest){
 																"</Schema>")
 							);
 	
-	// insert data test
-	DbColName colname;
-	colname,"nama","alamat";
-	
+	// insert data test	
 	DbRecord rec;
-	rec,"obin","wonosobo";
+	rec["nama"] = "obin";
+	rec["alamat"] = "wonosobo";
 	
 	const string row = "test-ajah";
 	
-	EXPECT_TRUE(dbman.insertData(table_name,row,colname,rec));
+	EXPECT_TRUE(dbman.insertData(table_name,row,&rec));
 	
 	
 	// delete data test
 	EXPECT_TRUE(dbman.deleteData(table_name,row));
+	
+}
+
+TEST(Database,SearchTest)
+{
+	using namespace Anspypher;
+	const string table_name = "UnitTest";
+	DbManager dbman;
+	
+	// insert data test	
+	DbRecord rec;
+	rec["nama"] = "obin";
+	rec["alamat"] = "wonosobo";
+	
+	string row = "test-ajah";
+	
+	EXPECT_TRUE(dbman.insertData(table_name,row,&rec));
+	
+	DbRecords dbrs = dbman.findRow(table_name, row);
+	
+	// map test
+	DbRecord kv;
+	
+	kv["nama"] = "obin";
+	kv["alamat"] = "wonosobo";
+	
+	row = "another-row";
+	
+	EXPECT_TRUE(dbman.insertData(table_name,row,&kv));
+	
+	dbrs = dbman.findRow(table_name, row);
+	
+	//cout << rec_ptr;
+	
+	EXPECT_TRUE((*dbrs.at(0).get())["nama"].compare("obin") == 0);
+	EXPECT_TRUE((*dbrs.at(1).get())["alamat"].compare("wonosobo") == 0);
+	
+	//cout << rec_ptr;
 	
 }
 
@@ -106,10 +147,11 @@ TEST(Database,DropTableTest)
 }
 
 
-
-
 int main(int argc,char** argv)
 {
+
+	//init_with_policy<AppPolicy>(argc, argv);
+	
 	testing::InitGoogleTest(&argc,argv);
 	return RUN_ALL_TESTS();
 }

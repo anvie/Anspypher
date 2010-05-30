@@ -32,23 +32,24 @@ if(DEFINED $ENV{HYPERTABLE_ROOT_DIR})
     )
 else()
   find_library(HYPERTABLE_LIBRARIES NAMES Hypertable NO_DEFAULT_PATH PATHS
-    /opt/hypertable/current/include
     /opt/hypertable/current/lib
     $ENV{HYPERTABLE_ROOT_DIR}/lib
     )
 endif()
 
-set(HYPERTABLE_LIBRARIES
-  "${HYPERTABLE_LIB_DIR}/libHypertable.a"
-  "${HYPERTABLE_LIB_DIR}/libHyperDfsBroker.a"
-  "${HYPERTABLE_LIB_DIR}/libHypertable.a"
-	"${HYPERTABLE_LIB_DIR}/libHyperComm.a"
-	"${HYPERTABLE_LIB_DIR}/libHyperCommon.a"
-	"${HYPERTABLE_LIB_DIR}/libHyperspace.a"
-	"${HYPERTABLE_LIB_DIR}/libHyperTools.a"
-	)
+set(HYPERTABLE_LIBRARIES Hypertable HyperDfsBroker Hypertable HyperComm HyperCommon Hyperspace HyperTools)
 
-if (HYPERTABLE_LIBRARIES AND HYPERTABLE_INCLUDE_DIR AND HYPERTABLE_COMMON_INCLUDE_DIR)
+#set(HYPERTABLE_LIBRARIES
+#  ${HYPERTABLE_LIB_DIR}/libHypertable.a
+#  ${HYPERTABLE_LIB_DIR}/libHyperDfsBroker.a
+#  ${HYPERTABLE_LIB_DIR}/libHypertable.a
+#  ${HYPERTABLE_LIB_DIR}/libHyperComm.a
+#  ${HYPERTABLE_LIB_DIR}/libHyperCommon.a
+#  ${HYPERTABLE_LIB_DIR}/libHyperspace.a
+#  ${HYPERTABLE_LIB_DIR}/libHyperTools.a
+#)
+
+if (HYPERTABLE_LIBRARIES AND HYPERTABLE_INCLUDE_DIR AND HYPERTABLE_COMMON_INCLUDE_DIR AND HYPERTABLE_LIB_DIR)
 	SET(HYPERTABLE_FOUND "YES")
 else()
 	SET(HYPERTABLE_FOUND "NO")
@@ -56,9 +57,9 @@ endif()
 
 if (HYPERTABLE_FOUND)
   message(STATUS "Found Hypertable inc dir: ${HYPERTABLE_INCLUDE_DIR}")
-	message(STATUS "Found Hypertable: ${HYPERTABLE_LIBRARIES}")
+  message(STATUS "Found Hypertable: ${HYPERTABLE_LIBRARIES}")
 else()
-	message(FATAL_ERROR "Couldn't find Hypertable library, set root path to HYPERTABLE_ROOT_DIR")
+  message(FATAL_ERROR "Couldn't find Hypertable library, set root path to HYPERTABLE_ROOT_DIR")
 endif()
 
 

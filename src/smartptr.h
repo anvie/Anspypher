@@ -60,9 +60,15 @@ namespace Smartptr {
 	class QuickWeakData : public ReferenceCount
 	{
 	public:
-		typedef intrusive_ptr< QuickWeakData > type;
+		typedef intrusive_ptr< QuickWeakData<T> > type;
+		
 		QuickWeakData(T* d_): d(d_){};
 		~QuickWeakData(){ delete d; }
+		
+		T* operator->() const {
+			return d;
+		}
+		
 		T* d;
 	};
 

@@ -18,19 +18,14 @@ namespace Anspypher {
 	
 	ClientPtr DbManager::client = 0;
 	
-	DbManager::DbManager()
-	{
-		init();
-	}
-	
 	/**
 	 * Inisialisasi Database Client
 	 * static global.
 	 */
-	void DbManager::init()
+	void DbManager::init(const string& install_dir, const string& config_file)
 	{
 		if (client.get() == 0) {
-			client = new Client();
+			client = new Client(install_dir, config_file);
 		}
 	}
 	
@@ -38,12 +33,11 @@ namespace Anspypher {
 	 * To insert data.
 	 * \param table a table name.
 	 * \param row a row name used as key.
-	 * \param colname is a column family name.
 	 * \param record is a record to insert.
 	 * \return boolean. true if success otherwise false.
 	 * \sa insertData(const string& tablename, const string& row, DbColName& colname, DbRecords& records)
 	 */
-	bool DbManager::insertData(const string& table, const string& row, DbColName& colname, DbRecord& record)
+	bool DbManager::insertData(const string& table, const string& row, DbRecord* record)
 	{
 		TablePtr tbl;
 		TableMutatorPtr mutator;
@@ -60,7 +54,7 @@ namespace Anspypher {
 		
 		mutator = tbl->create_mutator();
 		
-		OneCell cell = this->DbRecord2Cell(row, colname, record);
+		OneCell cell = this->DbRecord2Cell(row, record);
 		
 		mutator->set_cells(cell);
 		
@@ -77,20 +71,26 @@ namespace Anspypher {
 	 * \param colname a column name.
 	 * \param records list of DbRecord.
 	 */
-	bool DbManager::insertData(const string& tablename, const string& row, DbColName& colname, DbRecords& records)
+	bool DbManager::insertData(const string& table, const string& row, DbRecords& records)
 	{
-		TablePtr table;
+		TablePtr tbl;
 		TableMutatorPtr mutator;
 		
 		assert(client);
 		
-		table = client->open_table(tablename.c_str());
+		try {
+			tbl = client->open_table(table.c_str());
+		}
+		catch (Hypertable::Exception e) {
+			cerr << "Cannot open table. " << e.what() << endl;
+			return false;
+		}
 		
-		mutator = table->create_mutator();
+		mutator = tbl->create_mutator();
 		
-		MultiCell cells = this->DbRecords2Cells(row, colname, records);
+		MultiCell cells = this->DbRecords2Cells(row, records);
 		
-		MultiCell::iterator it;
+		MultiCell::const_iterator it;
 		
 		for (it = cells.begin(); it != cells.end(); ++it) {
 			mutator->set_cells( *it );
@@ -101,6 +101,27 @@ namespace Anspypher {
 		return !mutator->need_retry();
 	}
 	
+	bool DbManager::insertDataCell(const string& table, const string& row, const OneCell& cell)
+	{
+		TablePtr tbl;
+		TableMutatorPtr mutator;
+		
+		assert(client);
+		
+		try {
+			tbl = client->open_table(table.c_str());
+		}
+		catch (Hypertable::Exception e) {
+			cerr << "Cannot open table. " << e.what() << endl;
+			return false;
+		}
+		
+		mutator = tbl->create_mutator();
+		mutator->set_cells(cell);
+		mutator->flush();
+		
+		return !mutator->need_retry();	
+	}
 	
 	/**
 	 * To delete a single data.
@@ -117,42 +138,44 @@ namespace Anspypher {
 		return !mutator->need_retry();
 	}
 	
-	OneCell DbManager::DbRecord2Cell(const string& row, DbColName& colname,const DbRecord& dbr)
+	OneCell DbManager::DbRecord2Cell(const string& row, DbRecord* dbr)
 	{
 		OneCell onec;
 		int i = 0;
+		
+		DbColName col(dbr);
+		
 		DbColName::iterator it;
-		for(it = colname.begin(); it != colname.end(); ++it)
+		for(it = col.begin(); it != col.end(); ++it)
 		{
 			onec.push_back(
-									Cell(
-											 (const char*)row.c_str(),
-											 (const char*)(*it).c_str(),
-											 (const char*)0,
-											 ::AUTO_ASSIGN,
-											 ::AUTO_ASSIGN,
-											 (uint8_t*)dbr[i].c_str(),
-											 (uint32_t)dbr[i].length(),
-											 ::FLAG_INSERT
-											 )
+				Cell(
+						 (const char*)row.c_str(),
+						 (const char*)(*it).c_str(),
+						 (const char*)0,
+						 ::AUTO_ASSIGN,
+						 ::AUTO_ASSIGN,
+						 (uint8_t*)(*dbr)[*it].c_str(),
+						 (uint32_t)(*dbr)[*it].length(),
+						 ::FLAG_INSERT
+						 )
 			);
 			++i;
 		}
 		return onec;
 	}
 	
-	MultiCell DbManager::DbRecords2Cells(const string& row, DbColName& colname, DbRecords& dbrs)
+	MultiCell DbManager::DbRecords2Cells(const string& row, DbRecords& dbrs)
 	{
 		MultiCell cells;
 		DbRecords::iterator it;
 		for( it = dbrs.begin(); it != dbrs.end(); ++it )
 		{
-			cells.push_back(this->DbRecord2Cell(row,colname,*it));
+			cells.push_back(this->DbRecord2Cell(row,(*it).get()));
 		}
 		return cells;
 	}
 	
-	// test
 	/**
 	 * Create a table.
 	 * \param name a table name to create.
@@ -211,25 +234,76 @@ namespace Anspypher {
 		return rv;
 	}
 	
+
+	
+	/**
+	 * Same as findRow(const string& tablename,const string& rowname)\n
+	 * but with col specified.
+	 * \param table a table name.
+	 * \row a row name.
+	 * \col a column name.
+	 * \return QuickWeakData<DbRecords>
+	 */
+	DbRecords
+	DbManager::findData(const string& table, const string& row, const string& col)
+	{
+		DbRecords dbrs;
+		
+		ScanSpecBuilder ssb; ssb.clear();
+		
+		ssb.add_row_interval(row.c_str(), true, row.c_str(), true);
+		ssb.add_column(col.c_str());
+		ssb.set_max_versions(1);
+		
+		TablePtr tbl = client->open_table(table.c_str());
+		TableScannerPtr scanner = tbl->create_scanner(ssb.get());
+		
+		Cell cell;
+		
+		while (scanner->next(cell)) {
+			
+			DbRecordPtr dbr = new DbRecord();
+			
+			const string _key(cell.column_family);
+			const string _val((const char*)cell.value,cell.value_len);
+			
+			(*dbr)[_key] = _val;
+			dbrs.push_back(dbr);
+		}
+		return dbrs;
+	}
+	
+	
 	/**
 	 * Find a row.
 	 * \param tablename name of table to find.
 	 * \param rowname name of row.
+	 * \param limit result limit.
 	 * \return DbRecord.
 	 */
-	QuickWeakData<DbRecord>::type DbManager::findRow(const string& tablename,const string& rowname)
+	DbRecords
+	DbManager::findRow(const string& table,const string& row, size_t limit)
 	{
-		TablePtr tbl = client->open_table(tablename.c_str());
+		TablePtr tbl = client->open_table(table.c_str());
 		
 		ScanSpecBuilder ssb; ssb.clear();
-		ssb.add_row_interval(rowname.c_str(), true, rowname.c_str(), true);
+		ssb.add_row_interval(row.c_str(), true, row.c_str(), true);
 		TableScannerPtr scanner = tbl->create_scanner(ssb.get());
 		
-		QuickWeakData<DbRecord>::type dbrs = new QuickWeakData<DbRecord>(new DbRecord());
+		DbRecords dbrs;
 		Cell cell;
 		
 		while (scanner->next(cell)) {
-			dbrs->d->push_back(string((const char*)cell.value,cell.value_len));
+			
+			DbRecordPtr dbr = new DbRecord();
+			
+			const string _key(cell.column_family);
+			const string _val((const char*)cell.value,cell.value_len);
+			
+			(*dbr)[_key] = _val;
+			
+			dbrs.push_back(dbr);
+			
 		}
 		return dbrs;
 	}
@@ -242,7 +316,7 @@ namespace Anspypher {
 	 */
 	bool DbManager::rowExists(const string& tablename,const string& rowname)
 	{
-		return findRow(tablename,rowname)->d->size() > 0;
+		return findRow(tablename,rowname).size() > 0;
 	}
 }
 

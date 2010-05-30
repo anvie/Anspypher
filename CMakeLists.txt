@@ -1,14 +1,16 @@
 PROJECT(anspypher)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+
+#SET(CMAKE_OSX_ARCHITECTURES ppc64 x86_64)
 #SET(CMAKE_VERBOSE_MAKEFILE TRUE)
 
 SET(Boost_USE_STATIC_LIBS   ON)
 SET(Boost_USE_MULTITHREADED ON)
+
 FIND_PACKAGE (Boost COMPONENTS system filesystem thread program_options iostreams)
 
 #MESSAGE(STATUS "boost inc path: ${Boost_INCLUDE_DIR}")
 #MESSAGE(STATUS "boost lib path: ${Boost_LIBRARIES}")
-
 
 IF(MSVC)
 foreach(flag_var
@@ -26,10 +28,6 @@ ENDIF(MSVC)
 #MESSAGE(STATUS "CMAKE_CXX_FLAGS_DEBUG: ${CMAKE_CXX_FLAGS_DEBUG}")
 
 add_definitions(-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_REENTRANT -Wall -Wno-long-long -Wno-variadic-macros)
-
-if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-add_definitions(-DDEBUG -gdb)
-endif()
 
 FILE(GLOB CPPS src/*.c src/*.cpp src/*.h gen/*.cpp gen/*.h gen/*.cc)
 
@@ -82,43 +80,58 @@ ADD_LIBRARY(anspypher ${SOURCES})
 ADD_EXECUTABLE(anspypherd main.cpp)
 ADD_EXECUTABLE(test test.cpp)
 
-set(ALL_LIBS
-  anspypher
-  ${HYPERTABLE_LIBRARIES}
+#message(STATUS "ALL_LIBS: ${ALL_LIBS}")
+#message(STATUS "BOOST LIBS: ${Boost_LIBRARIES}")
+
+SET_TARGET_PROPERTIES(anspypherd
+	PROPERTIES
+	COMPILE_FLAGS	-Wno-deprecated
+	LINK_FLAGS  "-L${HYPERTABLE_LIB_DIR} -lHypertable -lHyperDfsBroker -lHypertable -lHyperComm -lHyperCommon -lHyperspace -lHyperTools"
+	)
+
+SET_TARGET_PROPERTIES(test 
+	PROPERTIES 
+	COMPILE_FLAGS "-I${GTEST_INCLUDE_DIR}"
+	LINK_FLAGS  "-L${HYPERTABLE_LIB_DIR} -lHypertable -lHyperDfsBroker -lHypertable -lHyperComm -lHyperCommon -lHyperspace -lHyperTools"
+	)
+
+TARGET_LINK_LIBRARIES(anspypherd
+	anspypher
 	${Boost_LIBRARIES}
 	${ICE_LIBRARIES}
 	${LibEvent_LIBS}
 	${Log4cpp_LIBRARIES}
 	${SIGAR_LIBRARIES}
 	${READLINE_LIBRARIES}
-	${Tcmalloc_LIBRARIES}
+	#${Tcmalloc_LIBRARIES}
 	z
-	ncurses
 	pthread
 	expat
-	${PROTOBUF_LIBRARIES}
-	)
+	${PROTOBUF_LIBRARIES}	
+)
 
-SET_TARGET_PROPERTIES(anspypherd
-	PROPERTIES
-	COMPILE_FLAGS	-Wno-deprecated
-	)
+message(STATUS ${HYPERTABLE_LIBRARIES})
 
-SET_TARGET_PROPERTIES(test 
-	PROPERTIES 
-	COMPILE_FLAGS "-I${GTEST_INCLUDE_DIR}"
-	) 
-
-TARGET_LINK_LIBRARIES(anspypherd ${ALL_LIBS})
-TARGET_LINK_LIBRARIES(test ${ALL_LIBS} ${GTEST_LIBRARIES})
+TARGET_LINK_LIBRARIES(test 
+  anspypher
+	#${Tcmalloc_LIBRARIES}
+	Hypertable HyperDfsBroker HyperComm HyperCommon Hyperspace HyperTools
+  ${Boost_LIBRARIES}
+  ${ICE_LIBRARIES}
+	${LibEvent_LIBS}
+  ${Log4cpp_LIBRARIES}
+  ${SIGAR_LIBRARIES}
+  ${READLINE_LIBRARIES}
+  z
+  pthread
+  expat
+  ${PROTOBUF_LIBRARIES}
+	${GTEST_LIBRARIES}
+)
 
 ADD_CUSTOM_TARGET(generate_doc doxygen anspypher.cfg)
 
-ADD_CUSTOM_TARGET(deploy
-#	cp bin/anspypher /opt/hypertable/current/bin/anspypher
-	COMMAND cp bin/test			 /opt/hypertable/current/bin/test
-	DEPENDS test
-	)
+
 
 
 
