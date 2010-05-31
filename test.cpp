@@ -18,7 +18,7 @@
 #include <map>
 #include <gtest/gtest.h>
 
-
+#include "config.h"
 #include "src/haszh.h"
 #include "src/keyword.h"
 #include "src/dbman.h"
@@ -147,12 +147,18 @@ TEST(Database,DropTableTest)
 	EXPECT_TRUE(dbman.dropTable(table_name));
 }
 
+void show_info()
+{
+	cout << "OS: " << SYSTEM_NAME << endl;
+	cout << "Machine: " << SYSTEM_MACHINE << endl;
+	cout << "Compiler: " << COMPILER_NAME << endl;
+	cout << "Hypertable config: " << HYPERTABLE_CONF << endl;
+}
 
 int main(int argc,char** argv)
 {
+	show_info();
 
-	//init_with_policy<AppPolicy>(argc, argv);
-	
 	testing::InitGoogleTest(&argc,argv);
 	return RUN_ALL_TESTS();
 }

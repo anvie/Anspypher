@@ -76,13 +76,7 @@ INCLUDE_DIRECTORIES(
 	${Tcmalloc_INCLUDE_DIR}
 	)
 
-# generate config.h file
-FILE(WRITE config.h
-  "#ifndef _HAVE_CONFIG_\n"
-  "# define _HAVE_CONFIG_\n"
-  "  #define HYPERTABLE_CONF ${HYPERTABLE_CONF}\n"
-  "#endif // _HAVE_CONFIG_\n"
-)
+include(cmake/configgen.cmake)
 	
 SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY lib)
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
