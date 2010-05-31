@@ -8,7 +8,7 @@
 
 #include <Common/Compat.h>
 #include <Common/Init.h>
-#include <AsyncComm/Config.h>
+//#include <AsyncComm/Config.h>
 
 #include <stdio.h>
 #include <stdint.h>
@@ -24,7 +24,7 @@
 #include "src/dbman.h"
 
 using namespace Hypertable;
-using namespace Hypertable::Config;
+//using namespace Hypertable::Config;
 using namespace std;
 
 

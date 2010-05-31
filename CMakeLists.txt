@@ -85,6 +85,7 @@ ADD_LIBRARY(anspypher ${SOURCES})
 
 ADD_EXECUTABLE(anspypherd main.cpp)
 ADD_EXECUTABLE(test test.cpp)
+ADD_EXECUTABLE(test_raw tests/test_raw.cpp)
 
 
 SET_TARGET_PROPERTIES(anspypherd
@@ -94,6 +95,12 @@ SET_TARGET_PROPERTIES(anspypherd
 	)
 
 SET_TARGET_PROPERTIES(test 
+	PROPERTIES 
+	COMPILE_FLAGS "-I${GTEST_INCLUDE_DIR}"
+	LINK_FLAGS  "-L${HYPERTABLE_LIB_DIR} -lHypertable -lHyperDfsBroker -lHypertable -lHyperComm -lHyperCommon -lHyperspace -lHyperTools"
+	)
+
+SET_TARGET_PROPERTIES(test_raw 
 	PROPERTIES 
 	COMPILE_FLAGS "-I${GTEST_INCLUDE_DIR}"
 	LINK_FLAGS  "-L${HYPERTABLE_LIB_DIR} -lHypertable -lHyperDfsBroker -lHypertable -lHyperComm -lHyperCommon -lHyperspace -lHyperTools"
@@ -120,6 +127,24 @@ if(CMAKE_SYSTEM_NAME MATCHES "Linux")
 endif()
 
 TARGET_LINK_LIBRARIES(test 
+  anspypher
+  ${Tcmalloc_LIBRARIES}
+  Hypertable HyperDfsBroker HyperComm HyperCommon Hyperspace HyperTools
+  ${Boost_LIBRARIES}
+  ${ICE_LIBRARIES}
+  ${LibEvent_LIBS}
+  ${Log4cpp_LIBRARIES}
+  ${SIGAR_LIBRARIES}
+  ${READLINE_LIBRARIES}
+  z
+  pthread
+  expat
+  ${PROTOBUF_LIBRARIES}
+  ${GTEST_LIBRARIES}
+  ${ADD_LIBS}
+)
+
+TARGET_LINK_LIBRARIES(test_raw
   anspypher
   ${Tcmalloc_LIBRARIES}
   Hypertable HyperDfsBroker HyperComm HyperCommon Hyperspace HyperTools
