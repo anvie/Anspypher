@@ -13,6 +13,7 @@
 #include <list>
 #include <string>
 #include <map>
+#include <stdint.h>
 
 #include <Common/System.h>
 #include <Common/Error.h>
@@ -23,6 +24,7 @@
 #include <boost/utility.hpp>
 #include <boost/intrusive_ptr.hpp>
 
+#include "defs.h"
 #include "smartptr.h"
 
 namespace Anspypher {
@@ -121,7 +123,7 @@ namespace Anspypher {
 	public:
 		
 		DbManager(){
-			init("/opt/hypertable/current","/etc/hypertable/hypertable.cfg");
+		  init("/opt/hypertable/current",HYPERTABLE_CONF);
 		}
 		DbManager(const string& install_dir, const string& config_file){
 			init(install_dir, config_file);

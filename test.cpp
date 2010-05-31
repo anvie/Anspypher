@@ -6,6 +6,10 @@
  */
 
 
+#include <Common/Compat.h>
+#include <Common/Init.h>
+#include <AsyncComm/Config.h>
+
 #include <stdio.h>
 #include <stdint.h>
 #include <iostream>
@@ -14,9 +18,6 @@
 #include <map>
 #include <gtest/gtest.h>
 
-#include <Common/Compat.h>
-#include <Common/Init.h>
-#include <AsyncComm/Config.h>
 
 #include "src/haszh.h"
 #include "src/keyword.h"

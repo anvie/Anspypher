@@ -12,6 +12,10 @@
 #ifndef __ANSPYPHER_DEFS_H__
 #define __ANSPYPHER_DEFS_H__
 
+
+#include "../config.h" //auto generated file
+
+
 namespace Anspypher {
 	static const char VERSION[] = "0.0.1-alpha";
 }

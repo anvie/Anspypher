@@ -17,7 +17,10 @@ find_path(ICE_INCLUDE_DIR Ice/Ice.h NO_DEFAULT_PATH PATHS
 	)
 	
 find_library(ICE_LIBRARY_ICE NAMES Ice NO_DEFAULT_PATH PATHS
+  /usr/local/lib
+  /opt/local/lib
 	$ENV{ICE_ROOT_DIR}/lib
+	$ENV{ICE_ROOT_DIR}/lib64
 	)
 
 find_library(ICE_LIBRARY_ICEUTIL NAMES IceUtil NO_DEFAULT_PATH PATHS
@@ -26,6 +29,7 @@ find_library(ICE_LIBRARY_ICEUTIL NAMES IceUtil NO_DEFAULT_PATH PATHS
 	/usr/lib
 	/opt/lib
 	$ENV{ICE_ROOT_DIR}/lib
+	$ENV{ICE_ROOT_DIR}/lib64
 	)
 
 if (ICE_LIBRARY_ICE AND ICE_LIBRARY_ICEUTIL)

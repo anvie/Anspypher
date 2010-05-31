@@ -24,7 +24,17 @@ find_path(HYPERTABLE_LIB_DIR libHypertable.a NO_DEFAULT_PATH PATHS
 	$ENV{HYPERTABLE_ROOT_DIR}/lib
 	)
 	
-#message(STATUS ${HYPERTABLE_COMMON_INCLUDE_DIR})
+find_file(HYPERTABLE_CONF hypertable.cfg NO_DEFAULT_PATH PATHS
+  /opt/hypertable/current/conf
+  /etc/hypertable
+)
+
+if(NOT HYPERTABLE_CONF)
+  set(HYPERTABLE_CONF "/etc/hypertable/hypertable.cfg")
+  message(STATUS "Unknown hypertable config file path. use default: ${HYPERTABLE_CONF}")
+else()
+  set(HYPERTABLE_CONF "\"${HYPERTABLE_CONF}\"")
+endif()
 
 if(DEFINED $ENV{HYPERTABLE_ROOT_DIR})
   find_library(HYPERTABLE_LIBRARIES NAME Hypertable NO_DEFAULT_PATH PATHS

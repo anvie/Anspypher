@@ -1,6 +1,8 @@
 PROJECT(anspypher)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
+message(STATUS "System: ${CMAKE_SYSTEM}")
+
 #SET(CMAKE_OSX_ARCHITECTURES ppc64 x86_64)
 #SET(CMAKE_VERBOSE_MAKEFILE TRUE)
 
@@ -28,6 +30,7 @@ ENDIF(MSVC)
 #MESSAGE(STATUS "CMAKE_CXX_FLAGS_DEBUG: ${CMAKE_CXX_FLAGS_DEBUG}")
 
 add_definitions(-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_REENTRANT -Wall -Wno-long-long -Wno-variadic-macros)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated")
 
 FILE(GLOB CPPS src/*.c src/*.cpp src/*.h gen/*.cpp gen/*.h gen/*.cc)
 
@@ -45,6 +48,14 @@ find_package(Hypertable REQUIRED)
 find_package(Tcmalloc)
 find_package(Gtest)
 find_package(BerkeleyDB REQUIRED)
+
+# show info
+message(STATUS "Hypertable conf file: ${HYPERTABLE_CONF}")
+
+if(CMAKE_SYSTEM_NAME MATCHES "Darwin")
+  # just strip it tcmalloc won't work in OSX SLP
+  set(Tcmalloc_LIBRARIES "")
+endif()
 
 INCLUDE_DIRECTORIES(
 	./
@@ -64,24 +75,23 @@ INCLUDE_DIRECTORIES(
 	${READLINE_INCLUDE_DIR}
 	${Tcmalloc_INCLUDE_DIR}
 	)
+
+# generate config.h file
+FILE(WRITE config.h
+  "#ifndef _HAVE_CONFIG_\n"
+  "# define _HAVE_CONFIG_\n"
+  "  #define HYPERTABLE_CONF ${HYPERTABLE_CONF}\n"
+  "#endif // _HAVE_CONFIG_\n"
+)
 	
 SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY lib)
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
 	
-IF(WIN32)
-	SET_TARGET_PROPERTIES( ansavlib
-		PROPERTIES
-		COMPILE_DEFINITIONS _CRT_SECURE_NO_WARNINGS
-		)
-ENDIF(WIN32)
-
 ADD_LIBRARY(anspypher ${SOURCES})
 
 ADD_EXECUTABLE(anspypherd main.cpp)
 ADD_EXECUTABLE(test test.cpp)
 
-#message(STATUS "ALL_LIBS: ${ALL_LIBS}")
-#message(STATUS "BOOST LIBS: ${Boost_LIBRARIES}")
 
 SET_TARGET_PROPERTIES(anspypherd
 	PROPERTIES
@@ -103,22 +113,22 @@ TARGET_LINK_LIBRARIES(anspypherd
 	${Log4cpp_LIBRARIES}
 	${SIGAR_LIBRARIES}
 	${READLINE_LIBRARIES}
-	#${Tcmalloc_LIBRARIES}
+	${Tcmalloc_LIBRARIES}
 	z
 	pthread
 	expat
-	${PROTOBUF_LIBRARIES}	
+	${PROTOBUF_LIBRARIES}
+	Hypertable
 )
 
-message(STATUS ${HYPERTABLE_LIBRARIES})
 
 TARGET_LINK_LIBRARIES(test 
   anspypher
-	#${Tcmalloc_LIBRARIES}
-	Hypertable HyperDfsBroker HyperComm HyperCommon Hyperspace HyperTools
+  ${Tcmalloc_LIBRARIES}
+  Hypertable HyperDfsBroker HyperComm HyperCommon Hyperspace HyperTools
   ${Boost_LIBRARIES}
   ${ICE_LIBRARIES}
-	${LibEvent_LIBS}
+  ${LibEvent_LIBS}
   ${Log4cpp_LIBRARIES}
   ${SIGAR_LIBRARIES}
   ${READLINE_LIBRARIES}
@@ -126,7 +136,8 @@ TARGET_LINK_LIBRARIES(test
   pthread
   expat
   ${PROTOBUF_LIBRARIES}
-	${GTEST_LIBRARIES}
+  ${GTEST_LIBRARIES}
+  Hypertable
 )
 
 ADD_CUSTOM_TARGET(generate_doc doxygen anspypher.cfg)
