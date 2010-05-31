@@ -121,6 +121,9 @@ TARGET_LINK_LIBRARIES(anspypherd
 	Hypertable
 )
 
+if(CMAKE_SYSTEM_NAME MATCHES "Linux")
+ set(ADD_LIBS Hypertable)
+endif()
 
 TARGET_LINK_LIBRARIES(test 
   anspypher
@@ -137,7 +140,7 @@ TARGET_LINK_LIBRARIES(test
   expat
   ${PROTOBUF_LIBRARIES}
   ${GTEST_LIBRARIES}
-  Hypertable
+  ${ADD_LIBS}
 )
 
 ADD_CUSTOM_TARGET(generate_doc doxygen anspypher.cfg)
