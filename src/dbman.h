@@ -153,7 +153,7 @@ namespace Anspypher {
 		/**
 		 * get native client.
 		 */
-		ClientPtr getClient() const { return this->client; };
+		Client* getClient() const { return this->client; };
 		
 		
 	private:
@@ -161,7 +161,7 @@ namespace Anspypher {
 		MultiCell DbRecords2Cells(const string& row, DbRecords& dbrs);
 		
 	private:
-		static ClientPtr client;
+		static Client* client;
 	};
 	
 

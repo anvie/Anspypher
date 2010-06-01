@@ -16,7 +16,7 @@ namespace Anspypher {
 	using namespace std;
 	namespace popts = boost::program_options;
 	
-	ClientPtr DbManager::client = 0;
+	Client* DbManager::client = 0;
 	
 	/**
 	 * Inisialisasi Database Client
@@ -24,9 +24,9 @@ namespace Anspypher {
 	 */
 	void DbManager::init(const string& install_dir, const string& config_file)
 	{
-		if (client.get() == 0) {
-			client = new Client(install_dir, config_file);
-		}
+	     if (!client) {
+	  	 client = new Client(install_dir, config_file);
+	     }
 	}
 	
 	/**

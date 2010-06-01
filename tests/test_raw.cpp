@@ -17,9 +17,12 @@
 
 #include <gtest/gtest.h>
 
+#include "../src/dbman.h"
+
 using namespace Hypertable;
 using namespace std;
 
+/*
 TEST(Database,RawTest){
 	
 	ClientPtr client;
@@ -47,7 +50,15 @@ TEST(Database,RawTest){
 	
 	
 }
+*/
 
+TEST(Database,nonRaw){
+
+  using namespace Anspypher;
+
+  DbManager dbman;
+
+}
 
 
 int main(int argc, char* argv[])
